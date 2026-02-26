@@ -144,58 +144,39 @@ export function generateInvoicePDF(formData, serialNumber) {
         .text(formData.email, 315, studentInfoY + 68);
 
       // Academic Information Section
-      const academicY = studentInfoY + 20;
+      const academicY = studentInfoY + 130;
 
       // Academic Information Section with brand colors
       doc.fillColor(primaryColor)
         .fontSize(14)
         .font("Helvetica-Bold")
-        .text("ACADEMIC INFORMATION", 50, academicY);
+        .text("ACADEMIC INFORMATION", 40, academicY);
 
       doc.strokeColor(primaryColor)
         .lineWidth(1)
-        .moveTo(50, academicY + 5)
+        .moveTo(40, academicY + 5)
         .lineTo(200, academicY + 5)
         .stroke();
 
+      // Left column academic info
       doc.fillColor("#333333")
         .fontSize(11)
         .font("Helvetica")
         .text("Class: " + formData.class, 50, academicY + 20)
-        .text("School Name: " + formData.schoolName, 50, academicY + 35)
-        .text("Section: " + (formData.section || "N/A"), 50, academicY + 50)
-        .text("Roll Number: " + (formData.rollNumber || "N/A"), 50, academicY + 65)
-        .text("City: " + (formData.city || "N/A"), 50, academicY + 80)
-        .text("Percentage/Grade: " + (formData.percentage || "N/A"), 50, academicY + 95)
-        .text("Center: " + (formData.center ? formData.center.charAt(0).toUpperCase() + formData.center.slice(1) : "N/A"), 50, academicY + 110);
+        .text("Section: " + (formData.section || "N/A"), 50, academicY + 35)
+        .text("Roll Number: " + (formData.rollNumber || "N/A"), 50, academicY + 50)
+        .text("Center: " + (formData.center ? formData.center.charAt(0).toUpperCase() + formData.center.slice(1) : "N/A"), 50, academicY + 65);
 
-      // Right side academic info
-      doc
-        .rect(305, academicY + 25, 250, 130)
-        .stroke();
-      doc
-        .fontSize(10)
-        .font("Helvetica-Bold")
-        .text("School Name:", 315, academicBoxY + 10)
+      // Right column academic info
+      doc.fillColor("#333333")
+        .fontSize(11)
         .font("Helvetica")
-        .fontSize(9)
-        .text(formData.schoolName, 315, academicBoxY + 28);
-
-      doc
-        .fontSize(10)
-        .font("Helvetica-Bold")
-        .text("City:", 315, academicBoxY + 65)
-        .font("Helvetica")
-        .text(formData.city || "N/A", 315, academicBoxY + 83);
-
-      doc
-        .font("Helvetica-Bold")
-        .text("Percentage/Grade:", 315, academicBoxY + 105)
-        .font("Helvetica")
-        .text(formData.percentage || "N/A", 315, academicBoxY + 123);
+        .text("School Name: " + formData.schoolName, 300, academicY + 20)
+        .text("City: " + (formData.city || "N/A"), 300, academicY + 35)
+        .text("Percentage/Grade: " + (formData.percentage || "N/A"), 300, academicY + 50);
 
       // Fee Summary with brand colors
-      const feeY = academicBoxY + academicBoxHeight + 30;
+      const feeY = academicY + 90;
 
       doc.strokeColor(primaryColor)
         .lineWidth(2)
@@ -291,7 +272,7 @@ export function generateInvoicePDF(formData, serialNumber) {
       doc.fillColor("#333333")
         .fontSize(10)
         .font("Helvetica")
-        .text("Visit: https://your-domain.com/payment", 50, instructionsY + 155);
+        .text("Visit: https://byiitians.com/payment", 50, instructionsY + 155);
       
       doc.fillColor("#666666")
         .fontSize(9)

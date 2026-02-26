@@ -249,8 +249,8 @@ export const InvoiceDownloadButton = ({ formData, serialNumber }: InvoiceDownloa
                 <p style="font-weight: 600; margin: 5px 0 0;">${formData.city || "N/A"}</p>
               </div>
               <div style="border: 1px solid #ddd; padding: 12px;">
-                <p style="font-size: 11px; font-weight: bold; color: #999; margin: 0;">PERCENTAGE / GRADE</p>
-                <p style="font-weight: 600; margin: 5px 0 0;">${formData.percentage || "N/A"}</p>
+                <p style="font-size: 11px; font-weight: bold; color: #999; margin: 0;">CENTER</p>
+                <p style="font-weight: 600; margin: 5px 0 0;">${formData.center ? formData.center.charAt(0).toUpperCase() + formData.center.slice(1) : "N/A"}</p>
               </div>
             </div>
           </div>
@@ -266,7 +266,7 @@ export const InvoiceDownloadButton = ({ formData, serialNumber }: InvoiceDownloa
             </div>
           </div>
 
-          <div style="background: #e3f5ff; padding: 15px; border-left: 4px solid #2196F3; margin-bottom: 30px;">
+          <div style="background: #e3f5ff; padding: 15px; border-left: 4px solid #2196F3; margin-bottom: 20px;">
             <h3 style="font-weight: bold; margin: 0 0 12px;">PAYMENT INSTRUCTIONS</h3>
             <ol style="font-size: 12px; margin: 0; padding-left: 20px;">
               <li style="margin-bottom: 6px;">Scan the PayTM QR code to complete the payment of ₹300</li>
@@ -275,6 +275,12 @@ export const InvoiceDownloadButton = ({ formData, serialNumber }: InvoiceDownloa
               <li style="margin-bottom: 6px;">WhatsApp: +91 8447412646</li>
               <li>Your application will be verified upon receipt of payment</li>
             </ol>
+          </div>
+
+          <div style="background: #f0f8ff; padding: 15px; border-left: 4px solid #4CAF50; margin-bottom: 30px;">
+            <h3 style="font-weight: bold; margin: 0 0 8px;">💳 PAY ONLINE (INSTANT VERIFICATION)</h3>
+            <p style="font-size: 12px; margin: 0 0 5px;">Visit: <a href="https://byiitians.com/payment" style="color: #1976D2; text-decoration: underline;">https://byiitians.com/payment</a></p>
+            <p style="font-size: 11px; color: #666; margin: 0;">Click the link above for instant payment verification</p>
           </div>
 
           <div style="text-align: center; font-size: 11px; color: #999; border-top: 1px solid #ddd; padding-top: 15px;">
