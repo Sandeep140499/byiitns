@@ -16,6 +16,7 @@ interface InvoiceProps {
     city: string;
     gender?: string;
     percentage: string;
+    center?: string;
   };
   serialNumber: string;
 }
@@ -105,11 +106,19 @@ export const InvoiceTemplate = React.forwardRef<
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mt-2">
           <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">CITY</p>
-            <p className="font-semibold text-sm sm:text-base">{formData.city || "N/A"}</p>
+            <p className="font-semibold text-sm">{formData.city || "N/A"}</p>
           </div>
           <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">PERCENTAGE / GRADE</p>
-            <p className="font-semibold text-sm sm:text-base">{formData.percentage || "N/A"}</p>
+            <p className="font-semibold text-sm">{formData.percentage || "N/A"}</p>
+          </div>
+          <div className="border p-2 sm:p-3">
+            <p className="text-xs font-bold text-gray-600">CENTER</p>
+            <p className="font-semibold text-sm capitalize">{formData.center || "N/A"}</p>
+          </div>
+          <div className="border p-2 sm:p-3">
+            <p className="text-xs font-bold text-gray-600">GENDER</p>
+            <p className="font-semibold text-sm">{formData.gender || "N/A"}</p>
           </div>
         </div>
       </div>
@@ -122,7 +131,7 @@ export const InvoiceTemplate = React.forwardRef<
         </div>
         <div className="flex justify-between text-base sm:text-lg font-bold border-t-2 pt-3">
           <span>Total Amount</span>
-          <span className="text-xl sm:text-2xl text-red-600">₹225</span>
+          <span className="text-xl sm:text-2xl text-red-600">₹300</span>
         </div>
       </div>
 
@@ -130,7 +139,7 @@ export const InvoiceTemplate = React.forwardRef<
       <div className="mb-6 sm:mb-8 bg-blue-50 p-3 sm:p-4 border-l-4 border-blue-500">
         <h3 className="font-bold mb-3 text-sm sm:text-base">PAYMENT INSTRUCTIONS</h3>
         <ol className="text-xs sm:text-sm space-y-2 list-decimal list-inside">
-          <li>Scan PayTM QR code to complete payment of ₹225</li>
+          <li>Scan PayTM QR code to complete payment of ₹300</li>
           <li>Save your PayTM payment screenshot</li>
           <li>
             Send screenshot along with this invoice number (<strong>{serialNumber}</strong>) to: Suman Kumar
@@ -253,14 +262,14 @@ export const InvoiceDownloadButton = ({ formData, serialNumber }: InvoiceDownloa
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 16px; font-weight: bold; border-top: 2px solid #999; padding-top: 10px;">
               <span>Total Amount</span>
-              <span style="font-size: 20px; color: #d32f2f;">₹225</span>
+              <span style="font-size: 20px; color: #d32f2f;">₹300</span>
             </div>
           </div>
 
           <div style="background: #e3f5ff; padding: 15px; border-left: 4px solid #2196F3; margin-bottom: 30px;">
             <h3 style="font-weight: bold; margin: 0 0 12px;">PAYMENT INSTRUCTIONS</h3>
             <ol style="font-size: 12px; margin: 0; padding-left: 20px;">
-              <li style="margin-bottom: 6px;">Scan the PayTM QR code to complete the payment of ₹225</li>
+              <li style="margin-bottom: 6px;">Scan the PayTM QR code to complete the payment of ₹300</li>
               <li style="margin-bottom: 6px;">Save your PayTM payment screenshot</li>
               <li style="margin-bottom: 6px;">Send the screenshot along with this invoice number (<strong>${serialNumber}</strong>) to: Suman Kumar</li>
               <li style="margin-bottom: 6px;">WhatsApp: +91 8447412646</li>

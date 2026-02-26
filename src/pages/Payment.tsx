@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { ArrowLeft, CreditCard, Mail, CheckCircle2, AlertCircle, Loader2, Smartphone } from "lucide-react";
+import { ArrowLeft, CreditCard, Mail, CheckCircle2, AlertCircle, Loader2, Smartphone, MessageCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import paymentQR from "@/assets/paymentQR.jpeg";
 
@@ -91,6 +91,12 @@ export default function Payment() {
       setIsLoading(false);
       toast.error("Payment confirmation failed. Please try again.");
     }
+  };
+
+  const handleWhatsAppChat = () => {
+    const phoneNumber = "918447412646";
+    const message = encodeURIComponent("Hi, I need help with Olympiad registration payment.");
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
 
   const handleRedirectToHome = () => {
@@ -366,11 +372,18 @@ export default function Payment() {
               <div className="bg-amber-50 dark:bg-amber-950/30 border-2 border-amber-200 dark:border-amber-800 rounded-xl p-4 sm:p-6">
                 <div className="flex items-center gap-2 text-amber-900 dark:text-amber-300">
                   <AlertCircle className="h-5 w-5 flex-shrink-0" />
-                  <span className="font-semibold text-sm sm:text-base">Important Note</span>
+                  <span className="font-semibold text-sm sm:text-base">Need Help?</span>
                 </div>
                 <p className="text-amber-900 dark:text-amber-200 text-sm sm:text-base mt-2">
-                  After completing the payment, don't forget to click the "Confirm Payment" button above to finalize your registration.
+                  Having trouble with payment? Click below to chat with us on WhatsApp for instant support.
                 </p>
+                <Button
+                  onClick={handleWhatsAppChat}
+                  className="w-full mt-4 bg-green-500 hover:bg-green-600 text-white rounded-lg h-10 sm:h-11 text-sm sm:text-base"
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Chat on WhatsApp
+                </Button>
               </div>
             </CardContent>
           </Card>

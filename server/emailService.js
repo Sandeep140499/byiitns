@@ -287,7 +287,7 @@ export async function sendRegistrationEmails(formData) {
     <p><strong>City:</strong> ${formData.city || "Not specified"}</p>
     <p><strong>Percentage/Grade:</strong> ${formData.percentage || "Not specified"}</p>
     <hr/>
-    <p><strong>Registration Fee:</strong> ₹225</p>
+    <p><strong>Registration Fee:</strong> ₹300</p>
     <p><strong>Registration Date:</strong> ${new Date().toLocaleDateString()}</p>
   `;
 
@@ -297,103 +297,109 @@ export async function sendRegistrationEmails(formData) {
     to: studentEmail,
     subject: `ByIITians - Olympiad Registration Confirmation (${serialNumber})`,
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #d32f2f;">ByIITians</h1>
-        <h2>Olympiad Aptitude Test - Registration Confirmation</h2>
-        
-        <p>Dear ${formData.name},</p>
-        
-        <p>Thank you for registering for the Olympiad Aptitude Test!</p>
-        
-        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
-          <h3 style="color: #d32f2f;">Your Registration Serial Number: <strong>${serialNumber}</strong></h3>
-          <p>Please save this serial number for future reference.</p>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 ByIITians</h1>
+          <p style="margin: 5px 0 0; font-size: 16px; opacity: 0.9;">Always Build Concepts</p>
         </div>
         
-        <h3>Registration Details Summary</h3>
-        <p><strong>Name:</strong> ${formData.name}</p>
-        <p><strong>Class:</strong> ${formData.class}</p>
-        <p><strong>School:</strong> ${formData.schoolName}</p>
-        <p><strong>Registration Fee:</strong> ₹225</p>
-        
-        <h3>What's Next?</h3>
-        <ol>
-          <li>Scan the PayTM QR code to complete the payment of ₹225</li>
-          <li>Save your payment screenshot</li>
-          <li>Send the screenshot along with your serial number (${serialNumber}) to Suman Kumar</li>
-          <li>WhatsApp: +91 8447412646</li>
-          <li><strong>OR</strong> Click the button below for instant online payment</li>
-        </ol>
-        
-        <div style="text-align: center; margin: 20px 0;">
-          <a href="https://your-domain.com/payment" style="display: inline-block; background-color: #d32f2f; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
-            💳 Pay Online Instantly
-          </a>
+        <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+          <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 25px; text-align: center;">
+            <h2 style="margin: 0; font-size: 24px;">✅ Registration Successful!</h2>
+            <p style="margin: 10px 0 0; font-size: 16px;">Your Olympiad Aptitude Test registration has been confirmed</p>
+          </div>
+          
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #d32f2f;">
+            <h3 style="color: #d32f2f; margin: 0 0 15px; font-size: 20px;">📋 Your Registration Details</h3>
+            <p style="margin: 5px 0; color: #333;"><strong>Serial Number:</strong> <span style="background: #d32f2f; color: white; padding: 5px 10px; border-radius: 5px; font-family: monospace;">${serialNumber}</span></p>
+            <p style="margin: 5px 0; color: #333;"><strong>Name:</strong> ${formData.name}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>Class:</strong> ${formData.class}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>School:</strong> ${formData.schoolName}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>Center:</strong> ${formData.center ? formData.center.charAt(0).toUpperCase() + formData.center.slice(1) : 'Not specified'}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>Registration Fee:</strong> <span style="color: #d32f2f; font-weight: bold; font-size: 18px;">₹300</span></p>
+          </div>
+          
+          <div style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+            <h3 style="margin: 0 0 15px; font-size: 18px;">🏆 Exciting Prizes Await!</h3>
+            <div style="display: flex; justify-content: space-around; text-align: center;">
+              <div>
+                <div style="font-size: 24px; margin-bottom: 5px;">🥇</div>
+                <div style="font-weight: bold;">Tablet</div>
+              </div>
+              <div>
+                <div style="font-size: 24px; margin-bottom: 5px;">🥈</div>
+                <div style="font-weight: bold;">27" LED Monitor</div>
+              </div>
+              <div>
+                <div style="font-size: 24px; margin-bottom: 5px;">🥉</div>
+                <div style="font-weight: bold;">22" LED Monitor</div>
+              </div>
+            </div>
+          </div>
+          
+          <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #2196F3;">
+            <h3 style="color: #1976D2; margin: 0 0 15px; font-size: 18px;">💳 Complete Your Payment</h3>
+            <p style="margin: 10px 0; color: #333;">Complete your payment of ₹300 to finalize your registration:</p>
+            <ol style="margin: 15px 0; padding-left: 20px; color: #333;">
+              <li style="margin-bottom: 8px;">Scan the PayTM QR code sent in the attachment</li>
+              <li style="margin-bottom: 8px;">Save your payment screenshot</li>
+              <li style="margin-bottom: 8px;">Send screenshot with serial number to Suman Kumar</li>
+              <li style="margin-bottom: 8px;">WhatsApp: +91 8447412646</li>
+            </ol>
+          </div>
+          
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="https://your-domain.com/payment" style="display: inline-block; background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
+              💳 Pay Online Instantly
+            </a>
+          </div>
+          
+          <div style="background: #fff3cd; padding: 15px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ffc107;">
+            <p style="margin: 0; color: #856404;"><strong>⏰ Important:</strong> Registration closes on 26th March. Complete your payment before the deadline!</p>
+          </div>
+          
+          <div style="text-align: center; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="margin: 0; color: #666; font-size: 14px;">For any queries, contact us at:</p>
+            <p style="margin: 5px 0; color: #d32f2f; font-weight: bold;">📞 +91 8447412646</p>
+            <p style="margin: 5px 0; color: #666; font-size: 12px;">Generated on ${new Date().toLocaleString("en-IN")}</p>
+          </div>
         </div>
-        
-        <p>The detailed invoice has been attached to this email. Please download and keep it safe.</p>
-        
-        <hr style="margin: 30px 0;"/>
-        
-        <p>Best regards,<br/>
-        <strong>ByIITians Team</strong><br/>
-        Always Build Concepts</p>
-        
-        <p style="font-size: 12px; color: #999; margin-top: 20px;">
-          This is an automated email. Please do not reply to this email.
-        </p>
       </div>
     `,
-    attachments: [
-      {
-        filename: `ByIITians_Invoice_${serialNumber}.pdf`,
-        content: pdfBuffer,
-        contentType: "application/pdf",
-      },
-    ],
   };
 
   // Email to owner
   const ownerMailOptions = {
     from: "sumanme10@gmail.com",
     to: ownerEmail,
-    subject: `New Registration: ${formData.name} (${serialNumber})`,
+    subject: `New Olympiad Registration - ${formData.name} (${serialNumber})`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #d32f2f;">ByIITians - Admin Notification</h1>
-        <h2>New Olympiad Registration</h2>
-        
-        <p>A new student has registered for the Olympiad Aptitude Test.</p>
-        
-        <div style="background-color: #e3f2fd; padding: 15px; border-radius: 5px; margin: 20px 0;">
-          <h3>Serial Number: <strong style="color: #d32f2f;">${serialNumber}</strong></h3>
+        <div style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 ByIITians</h1>
+          <p style="margin: 5px 0 0; font-size: 16px; opacity: 0.9;">New Registration Received</p>
         </div>
         
-        <h3>Student Information</h3>
-        <p><strong>Name:</strong> ${formData.name}</p>
-        <p><strong>Father's Name:</strong> ${formData.fatherName}</p>
-        <p><strong>Phone Number:</strong> ${formData.phoneNumber}</p>
-        <p><strong>Email:</strong> ${formData.email}</p>
-        
-        <h3>Academic Information</h3>
-        <p><strong>Class:</strong> ${formData.class}</p>
-        <p><strong>School Name:</strong> ${formData.schoolName}</p>
-        <p><strong>Section:</strong> ${formData.section || "Not specified"}</p>
-        <p><strong>Roll Number:</strong> ${formData.rollNumber || "Not specified"}</p>
-        <p><strong>City:</strong> ${formData.city || "Not specified"}</p>
-        
-        <h3>Status Update</h3>
-        <p><strong>Status:</strong> Pending Payment Verification</p>
-        <p><strong>Registration Date:</strong> ${new Date().toLocaleDateString()}</p>
-        <p>Please verify the payment screenshot sent by the student at +91 8447412646</p>
-        
-        <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ccc;">
-          The detailed invoice has been attached for your records.
-        </p>
-        
-        <hr style="margin: 30px 0;"/>
-        
-        <p><strong>ByIITians Admin Panel</strong></p>
+        <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #d32f2f;">
+            <h3 style="color: #d32f2f; margin: 0 0 15px; font-size: 20px;">📋 Registration Details</h3>
+            <p style="margin: 5px 0; color: #333;"><strong>Serial Number:</strong> <span style="background: #d32f2f; color: white; padding: 5px 10px; border-radius: 5px; font-family: monospace;">${serialNumber}</span></p>
+            <p style="margin: 5px 0; color: #333;"><strong>Name:</strong> ${formData.name}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>Class:</strong> ${formData.class}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>School:</strong> ${formData.schoolName}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>Center:</strong> ${formData.center ? formData.center.charAt(0).toUpperCase() + formData.center.slice(1) : 'Not specified'}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>Registration Fee:</strong> <span style="color: #d32f2f; font-weight: bold; font-size: 18px;">₹300</span></p>
+            <p style="margin: 5px 0; color: #333;"><strong>Status:</strong> Pending Payment Verification</p>
+            <p style="margin: 5px 0; color: #333;"><strong>Registration Date:</strong> ${new Date().toLocaleDateString()}</p>
+            <p style="margin: 5px 0; color: #333;">Please verify the payment screenshot sent by the student at +91 8447412646</p>
+          </div>
+          
+          <div style="text-align: center; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="margin: 0; color: #666; font-size: 14px;">The detailed invoice has been attached for your records.</p>
+            <p style="margin: 10px 0 0; color: #d32f2f; font-weight: bold;">📞 +91 8447412646</p>
+            <p style="margin: 5px 0; color: #666; font-size: 12px;">Generated on ${new Date().toLocaleString("en-IN")}</p>
+          </div>
+        </div>
       </div>
     `,
     attachments: [

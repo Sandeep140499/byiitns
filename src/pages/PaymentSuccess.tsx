@@ -45,7 +45,7 @@ export default function PaymentSuccess() {
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-foreground/10">
                   <span>Registration Fee:</span>
-                  <span className="font-semibold text-foreground">₹225</span>
+                  <span className="font-semibold text-foreground">₹300</span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-foreground/10">
                   <span>Payment Status:</span>

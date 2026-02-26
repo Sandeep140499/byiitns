@@ -279,11 +279,11 @@ const Admin = () => {
                             <SelectItem value="CBSE">CBSE</SelectItem>
                             <SelectItem value="NTSE">NTSE</SelectItem>
                             <SelectItem value="Foundation">Foundation</SelectItem>
-                            <SelectItem value="Class 8 to 12">Class 8 to 12</SelectItem>
+                            <SelectItem value="Class 7 to 12">Class 8 to 12</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
-                      {contentCategory === "Class 8 to 12" && (
+                      {contentCategory === "Class 7 to 12" && (
                         <div className="space-y-2">
                           <Label htmlFor="class">Class *</Label>
                           <Select value={contentClass} onValueChange={setContentClass}>
@@ -291,6 +291,7 @@ const Admin = () => {
                               <SelectValue placeholder="Select class" />
                             </SelectTrigger>
                             <SelectContent>
+                              <SelectItem value="7">Class 7</SelectItem>
                               <SelectItem value="8">Class 8</SelectItem>
                               <SelectItem value="9">Class 9</SelectItem>
                               <SelectItem value="10">Class 10</SelectItem>

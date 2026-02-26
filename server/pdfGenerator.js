@@ -150,43 +150,29 @@ export function generateInvoicePDF(formData, serialNumber) {
       doc.fillColor(primaryColor)
         .fontSize(14)
         .font("Helvetica-Bold")
-        .text("ACADEMIC INFORMATION", 40, academicY);
+        .text("ACADEMIC INFORMATION", 50, academicY);
 
-      const academicBoxY = academicY + 25;
-      const academicBoxHeight = 130;
-
-      // Left side academic info with better styling
-      doc.strokeColor("#cccccc")
+      doc.strokeColor(primaryColor)
         .lineWidth(1)
-        .rect(40, academicBoxY, 255, academicBoxHeight)
+        .moveTo(50, academicY + 5)
+        .lineTo(200, academicY + 5)
         .stroke();
 
-      doc.fillColor(secondaryColor)
+      doc.fillColor("#333333")
         .fontSize(11)
-        .font("Helvetica-Bold")
-        .text("Class:", 50, academicBoxY + 10)
-        .fillColor("#333333")
-        .fontSize(12)
         .font("Helvetica")
-        .text(formData.class, 50, academicBoxY + 28);
-
-      doc
-        .font("Helvetica-Bold")
-        .text("Section:", 50, academicBoxY + 50)
-        .font("Helvetica")
-        .text(formData.section || "N/A", 50, academicBoxY + 68);
-
-      doc
-        .font("Helvetica-Bold")
-        .text("Roll Number:", 50, academicBoxY + 90)
-        .font("Helvetica")
-        .text(formData.rollNumber || "N/A", 50, academicBoxY + 108);
+        .text("Class: " + formData.class, 50, academicY + 20)
+        .text("School Name: " + formData.schoolName, 50, academicY + 35)
+        .text("Section: " + (formData.section || "N/A"), 50, academicY + 50)
+        .text("Roll Number: " + (formData.rollNumber || "N/A"), 50, academicY + 65)
+        .text("City: " + (formData.city || "N/A"), 50, academicY + 80)
+        .text("Percentage/Grade: " + (formData.percentage || "N/A"), 50, academicY + 95)
+        .text("Center: " + (formData.center ? formData.center.charAt(0).toUpperCase() + formData.center.slice(1) : "N/A"), 50, academicY + 110);
 
       // Right side academic info
       doc
-        .rect(305, academicBoxY, 250, academicBoxHeight)
+        .rect(305, academicY + 25, 250, 130)
         .stroke();
-
       doc
         .fontSize(10)
         .font("Helvetica-Bold")
@@ -229,7 +215,7 @@ export function generateInvoicePDF(formData, serialNumber) {
       doc.fillColor(primaryColor)
         .fontSize(14)
         .font("Helvetica-Bold")
-        .text("₹225", 480, feeY + 28, { align: "right" });
+        .text("₹300", 480, feeY + 28, { align: "right" });
 
       doc.fillColor(secondaryColor)
         .fontSize(11)
@@ -252,7 +238,7 @@ export function generateInvoicePDF(formData, serialNumber) {
       doc.fillColor(primaryColor)
         .fontSize(20)
         .font("Helvetica-Bold")
-        .text("₹225", 480, totalY + 8, { align: "right" });
+        .text("₹300", 480, totalY + 8, { align: "right" });
 
       // Payment Instructions with better styling
       const instructionsY = totalY + 60;
@@ -272,7 +258,7 @@ export function generateInvoicePDF(formData, serialNumber) {
         .fontSize(10)
         .font("Helvetica")
         .text(
-          "1. Scan PayTM QR code to complete payment of ₹225",
+          "1. Scan PayTM QR code to complete payment of ₹300",
           40,
           instructionsY + 35
         )

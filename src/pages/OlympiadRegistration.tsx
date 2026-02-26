@@ -6,22 +6,26 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import paymentQR from "@/assets/paymentQR.jpeg";
+import firstPrize from "@/assets/prizes/1st.png";
+import secondPrize from "@/assets/prizes/2nd.png";
+import thirdPrize from "@/assets/prizes/3rd.png";
 import { ArrowLeft, AlertCircle, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { InvoiceDownloadButton } from "@/components/InvoiceComponent";
 
-interface FormData {
+interface RegistrationFormData {
   name: string;
-  fatherName: string;
-  phoneNumber: string;
   email: string;
+  phoneNumber: string;
+  fatherName: string;
   class: string;
   section: string;
   rollNumber: string;
+  gender: string;
   schoolName: string;
   city: string;
-  gender: string;
   percentage: string;
+  center: string;
 }
 
 export default function OlympiadRegistration() {
@@ -29,7 +33,7 @@ export default function OlympiadRegistration() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [serialNumber, setSerialNumber] = useState("");
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<RegistrationFormData>({
     name: "",
     fatherName: "",
     phoneNumber: "",
@@ -41,6 +45,7 @@ export default function OlympiadRegistration() {
     city: "",
     gender: "",
     percentage: "",
+    center: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +74,8 @@ export default function OlympiadRegistration() {
       !formData.phoneNumber ||
       !formData.email ||
       !formData.class ||
-      !formData.schoolName
+      !formData.schoolName ||
+      !formData.center
     ) {
       toast.error("Please fill in all required fields");
       return false;
@@ -171,22 +177,47 @@ export default function OlympiadRegistration() {
             <div className="flex justify-center gap-4 sm:gap-6 lg:gap-8 my-4">
               <div className="text-center">
                 <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 p-3 sm:p-4 rounded-xl border-2 border-yellow-300 shadow-lg">
-                  <img
-                    src="https://via.placeholder.com/60x60?text=1st"
-                    alt="1st Prize Laptop"
-                    className="mx-auto h-12 w-12 sm:h-16 sm:w-16 object-contain animate-pulse"
-                  />
-                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-yellow-800">🏆 Premium Laptop</p>
+                  <div className="relative">
+                    <img
+                      src={firstPrize}
+                      alt="1st Prize Tablet"
+                      className="mx-auto h-12 w-12 sm:h-16 sm:w-16 object-contain animate-pulse"
+                    />
+                    <div className="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                      1st
+                    </div>
+                  </div>
+                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-yellow-800">🏆 Tablet</p>
                 </div>
               </div>
               <div className="text-center">
                 <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-3 sm:p-4 rounded-xl border-2 border-gray-300 shadow-lg">
-                  <img
-                    src="https://via.placeholder.com/60x60?text=2nd"
-                    alt="2nd Prize Tablet"
-                    className="mx-auto h-12 w-12 sm:h-16 sm:w-16 object-contain animate-pulse"
-                  />
-                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-gray-800">🥈 Advanced Tablet</p>
+                  <div className="relative">
+                    <img
+                      src={secondPrize}
+                      alt="2nd Prize 27 inch LED Monitor"
+                      className="mx-auto h-12 w-12 sm:h-16 sm:w-16 object-contain animate-pulse"
+                    />
+                    <div className="absolute -top-2 -right-2 bg-gray-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                      2nd
+                    </div>
+                  </div>
+                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-gray-800">🥈 27" LED Monitor</p>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-gradient-to-br from-orange-100 to-orange-200 p-3 sm:p-4 rounded-xl border-2 border-orange-300 shadow-lg">
+                  <div className="relative">
+                    <img
+                      src={thirdPrize}
+                      alt="3rd Prize 22 inch LED Monitor"
+                      className="mx-auto h-12 w-12 sm:h-16 sm:w-16 object-contain animate-pulse"
+                    />
+                    <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                      3rd
+                    </div>
+                  </div>
+                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-orange-800">🥉 22" LED Monitor</p>
                 </div>
               </div>
             </div>
@@ -228,7 +259,7 @@ export default function OlympiadRegistration() {
                     </li>
                     <li className="flex items-start space-x-3">
                       <span className="font-bold">2️⃣</span>
-                      <span>Complete the payment of ₹225</span>
+                      <span>Complete the payment of ₹300</span>
                     </li>
                     <li className="flex items-start space-x-3">
                       <span className="font-bold">3️⃣</span>
@@ -343,6 +374,7 @@ export default function OlympiadRegistration() {
                       city: "",
                       gender: "",
                       percentage: "",
+                      center: "",
                     });
                   }}
                   variant="outline"
@@ -390,7 +422,7 @@ export default function OlympiadRegistration() {
         <Card className="border-4 border-primary/20 rounded-3xl overflow-hidden bg-gradient-to-br from-card to-primary/5 shadow-lg">
           <CardHeader className="text-center pb-6">
             <CardDescription className="text-base">
-              Register for the Olympiad Aptitude Test - Fee ₹225
+              Register for the Olympiad Aptitude Test - Fee ₹300
             </CardDescription>
           </CardHeader>
 
@@ -487,7 +519,7 @@ export default function OlympiadRegistration() {
                         <SelectValue placeholder="Select class" />
                       </SelectTrigger>
                       <SelectContent>
-                        {[8, 9, 10, 11, 12].map((cls) => (
+                        {[7, 8, 9, 10, 11, 12].map((cls) => (
                           <SelectItem key={cls} value={cls.toString()}>
                             Class {cls}
                           </SelectItem>
@@ -547,6 +579,22 @@ export default function OlympiadRegistration() {
                   </div>
 
                   <div className="space-y-2">
+                    <Label htmlFor="center" className="text-foreground font-semibold">
+                      Select Center *
+                    </Label>
+                    <Select value={formData.center} onValueChange={(value) => handleSelectChange("center", value)}>
+                      <SelectTrigger className="border-2 rounded-xl">
+                        <SelectValue placeholder="Select your center" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="mehrauli">Mehrauli</SelectItem>
+                        <SelectItem value="vasant-kunj">Vasant Kunj</SelectItem>
+                        <SelectItem value="okhala">OKHALA</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
                     <Label htmlFor="rollNumber" className="text-foreground font-semibold">
                       Roll Number
                     </Label>
@@ -580,7 +628,7 @@ export default function OlympiadRegistration() {
               <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20 rounded-2xl p-4 space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="font-semibold text-foreground">Registration Fee:</span>
-                  <span className="text-2xl font-bold text-primary">₹225</span>
+                  <span className="text-2xl font-bold text-primary">₹300</span>
                 </div>
                 <p className="text-sm text-foreground/70">Payment required to complete your registration</p>
               </div>
@@ -597,7 +645,7 @@ export default function OlympiadRegistration() {
                     Processing...
                   </>
                 ) : (
-                  "Register & Pay ₹225"
+                  "Register & Pay ₹300"
                 )}
               </Button>
 
