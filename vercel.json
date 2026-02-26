@@ -2,15 +2,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "functions": {
-    "api/register.js": {
-      "runtime": "nodejs18.x"
+    "api/**/*.js": {
+      "runtime": "nodejs20.x"
     }
   },
   "rewrites": [
-    {
-      "source": "/api/register",
-      "destination": "/api/register.js"
-    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
