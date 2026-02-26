@@ -319,6 +319,12 @@ export default function OlympiadRegistration() {
 
               <div className="flex gap-3 pt-4">
                 <Button
+                  onClick={() => navigate("/payment")}
+                  className="flex-1 rounded-xl h-11 bg-green-600 hover:bg-green-700 font-bold"
+                >
+                  💳 Complete Payment
+                </Button>
+                <Button
                   onClick={() => {
                     setIsSubmitted(false);
                     setFormData({

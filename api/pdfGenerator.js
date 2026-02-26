@@ -24,49 +24,61 @@ export function generateInvoicePDF(formData, serialNumber) {
         reject(err);
       });
 
-      // Header with branding
+      // Header with branding – colorful banner
       doc
-        .fontSize(28)
+        .rect(40, 40, 515, 60)
+        .fill("#d32f2f")
+        .fillColor("white")
+        .fontSize(32)
         .font("Helvetica-Bold")
-        .text("ByIITians", { align: "center" })
-        .fontSize(11)
+        .text("ByIITians", 45, 50, { align: "left" })
+        .fontSize(12)
         .font("Helvetica")
-        .text("Always Build Concepts", { align: "center" })
-        .fontSize(9)
-        .text("Delhi | NEET | IIT | CBSE | NTSE | Foundation", { align: "center" });
+        .text("Always Build Concepts", 45, 70, { align: "left" });
 
-      doc.moveTo(40, 90).lineTo(555, 90).stroke();
+      doc.moveTo(40, 110).lineTo(555, 110).strokeColor("#d32f2f").lineWidth(2).stroke();
 
       // Invoice details header
       doc
-        .fontSize(16)
+        .fillColor("#333333")
+        .fontSize(18)
         .font("Helvetica-Bold")
-        .text("REGISTRATION INVOICE", 40, 110);
+        .text("REGISTRATION INVOICE", 40, 120);
 
-      // Invoice and serial number
+      // Invoice and serial number box
+      doc
+        .rect(40, 150, 250, 80)
+        .fillOpacity(0.1)
+        .fill("#1976d2")
+        .fillOpacity(1)
+        .stroke();
+
+      doc
+        .fillColor("#000000")
+        .fontSize(10)
+        .font("Helvetica-Bold")
+        .text("Invoice No:", 50, 160)
+        .font("Helvetica")
+        .fontSize(11)
+        .text(serialNumber, 120, 160);
+
       doc
         .fontSize(10)
         .font("Helvetica-Bold")
-        .text("Invoice No:", 40, 140)
+        .text("Date:", 50, 180)
         .font("Helvetica")
         .fontSize(11)
-        .text(serialNumber, 150, 140);
+        .text(new Date().toLocaleDateString("en-IN"), 120, 180);
 
       doc
         .fontSize(10)
         .font("Helvetica-Bold")
-        .text("Date:", 40, 160)
+        .text("Status:", 50, 200)
         .font("Helvetica")
         .fontSize(11)
-        .text(new Date().toLocaleDateString("en-IN"), 150, 160);
-
-      doc
-        .fontSize(10)
-        .font("Helvetica-Bold")
-        .text("Status:", 40, 180)
-        .font("Helvetica")
-        .fontSize(11)
-        .text("PENDING PAYMENT VERIFICATION", 150, 180, { color: "#d32f2f" });
+        .fillColor("#d32f2f")
+        .text("PENDING PAYMENT VERIFICATION", 120, 200)
+        .fillColor("#000000");
 
       doc.moveTo(40, 210).lineTo(555, 210).stroke();
 

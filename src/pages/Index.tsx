@@ -142,9 +142,9 @@ const Index = () => {
               variant="destructive"
               className="rounded-full px-8 py-3 bg-red-600 hover:bg-red-700 text-white animate-[pulse_3s_infinite] transition-all duration-700 ease-in-out hover:animate-none"
             >
-              <a href="/olympiad-registration" onClick={() => setShowOlympiadPopup(false)}>
+              <Link to="/olympiad-registration" onClick={() => setShowOlympiadPopup(false)}>
                 Register Now
-              </a>
+              </Link>
             </Button>
           </DialogFooter>
           <DialogClose />

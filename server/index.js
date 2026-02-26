@@ -1,5 +1,5 @@
 import express from "express";
-import { sendRegistrationEmails } from "./emailService.js";
+import { sendRegistrationEmails, sendPaymentLinkEmail } from "./emailService.js";
 
 const app = express();
 
@@ -22,6 +22,45 @@ app.use((req, res, next) => {
 // Health check endpoint
 app.get("/api/health", (req, res) => {
   res.json({ status: "OK", message: "Server is running" });
+});
+
+// Payment link email endpoint
+app.post("/api/send-payment-link", async (req, res) => {
+  try {
+    const { name, email, amount, paymentMethod } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !amount || !paymentMethod) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields",
+      });
+    }
+
+    // Send payment link email
+    const emailResult = await sendPaymentLinkEmail({ name, email, amount, paymentMethod });
+
+    if (emailResult.success) {
+      res.json({
+        success: true,
+        message: "Payment link sent successfully!",
+        paymentLink: emailResult.paymentLink,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: "Failed to send payment link",
+        error: emailResult.error,
+      });
+    }
+  } catch (error) {
+    console.error("API Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
+  }
 });
 
 // Registration and email endpoint

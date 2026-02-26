@@ -16,6 +16,243 @@ function generateSerialNumber() {
   return `BYIIT-${randomId}`;
 }
 
+// Send payment link email
+export async function sendPaymentLinkEmail(formData) {
+  const { name, email, amount, paymentMethod } = formData;
+
+  // Generate payment link (in production, use actual payment gateway)
+  const paymentLink = `https://your-payment-gateway.com/pay?amount=${amount}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&method=${paymentMethod}`;
+
+  const emailTemplate = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Payment Link - Olympiad Registration</title>
+      <style>
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          line-height: 1.6;
+          color: #333;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #f4f4f4;
+        }
+        .container {
+          background-color: #ffffff;
+          padding: 30px;
+          border-radius: 10px;
+          box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 30px;
+          padding-bottom: 20px;
+          border-bottom: 2px solid #e9ecef;
+        }
+        .logo {
+          font-size: 28px;
+          font-weight: bold;
+          color: #d32f2f;
+          margin-bottom: 10px;
+        }
+        .title {
+          color: #2c3e50;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+        .content {
+          margin-bottom: 30px;
+        }
+        .payment-details {
+          background-color: #f8f9fa;
+          padding: 20px;
+          border-radius: 8px;
+          margin: 20px 0;
+        }
+        .payment-details h3 {
+          color: #495057;
+          margin-top: 0;
+        }
+        .detail-row {
+          display: flex;
+          justify-content: space-between;
+          padding: 8px 0;
+          border-bottom: 1px solid #dee2e6;
+        }
+        .detail-row:last-child {
+          border-bottom: none;
+        }
+        .detail-label {
+          font-weight: 600;
+          color: #6c757d;
+        }
+        .detail-value {
+          font-weight: bold;
+          color: #2c3e50;
+        }
+        .payment-button {
+          display: inline-block;
+          background-color: #d32f2f;
+          color: white;
+          padding: 15px 30px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: bold;
+          font-size: 18px;
+          text-align: center;
+          margin: 20px 0;
+          transition: background-color 0.3s ease;
+        }
+        .payment-button:hover {
+          background-color: #b71c1c;
+        }
+        .instructions {
+          background-color: #e7f3ff;
+          border-left: 4px solid #2196f3;
+          padding: 15px;
+          margin: 20px 0;
+        }
+        .instructions h4 {
+          color: #2196f3;
+          margin-top: 0;
+        }
+        .footer {
+          text-align: center;
+          margin-top: 30px;
+          padding-top: 20px;
+          border-top: 2px solid #e9ecef;
+          color: #6c757d;
+          font-size: 14px;
+        }
+        .support-info {
+          background-color: #fff3cd;
+          border: 1px solid #ffeaa7;
+          padding: 15px;
+          border-radius: 8px;
+          margin: 20px 0;
+        }
+        .whatsapp-button {
+          display: inline-block;
+          background-color: #25d366;
+          color: white;
+          padding: 10px 20px;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: bold;
+          margin-top: 10px;
+        }
+        .whatsapp-button:hover {
+          background-color: #128c7e;
+        }
+        @media only screen and (max-width: 600px) {
+          body {
+            padding: 10px;
+          }
+          .container {
+            padding: 20px;
+          }
+          .payment-button {
+            display: block;
+            width: 100%;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <div class="logo">🏆 ByIITians</div>
+          <h1 class="title">Payment Link</h1>
+        </div>
+
+        <div class="content">
+          <p>Dear <strong>${name}</strong>,</p>
+          
+          <p>Thank you for registering for the Olympiad Aptitude Test. Please complete your payment using the link below:</p>
+
+          <div class="payment-details">
+            <h3>Payment Details</h3>
+            <div class="detail-row">
+              <span class="detail-label">Name:</span>
+              <span class="detail-value">${name}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Email:</span>
+              <span class="detail-value">${email}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Amount:</span>
+              <span class="detail-value">₹${amount}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Payment Method:</span>
+              <span class="detail-value">${paymentMethod.charAt(0).toUpperCase() + paymentMethod.slice(1)}</span>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <a href="${paymentLink}" class="payment-button">
+              💳 Complete Payment Now
+            </a>
+          </div>
+
+          <div class="instructions">
+            <h4>📋 Instructions:</h4>
+            <ol>
+              <li>Click the "Complete Payment Now" button above</li>
+              <li>You will be redirected to our secure payment gateway</li>
+              <li>Enter your payment details and complete the transaction</li>
+              <li>After payment, return to the registration page and click "Confirm Payment"</li>
+              <li>You will receive a confirmation email once payment is verified</li>
+            </ol>
+          </div>
+
+          <div class="support-info">
+            <h4>💬 Need Help?</h4>
+            <p>If you face any issues with payment or have questions, feel free to contact us:</p>
+            <a href="https://wa.me/918447412646" class="whatsapp-button">
+              📱 WhatsApp Support: +91 8447412646
+            </a>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p>This is an automated message. Please do not reply to this email.</p>
+          <p>© 2024 ByIITians. All rights reserved.</p>
+          <p><em>Always Build Concepts</em></p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const mailOptions = {
+    from: "sumanme10@gmail.com",
+    to: email,
+    subject: `Payment Link for Olympiad Registration - ₹${amount}`,
+    html: emailTemplate,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    return {
+      success: true,
+      message: 'Payment link sent successfully',
+      paymentLink
+    };
+  } catch (error) {
+    console.error('Error sending payment link:', error);
+    return {
+      success: false,
+      message: 'Failed to send payment link',
+      error: error.message
+    };
+  }
+}
+
 // Send emails to both owner and student
 export async function sendRegistrationEmails(formData) {
   const serialNumber = generateSerialNumber();
