@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { SectionCard } from "@/components/SectionCard";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Settings } from "lucide-react";
 import { toast } from "sonner";
 import { QRCodeSVG } from "qrcode.react";
@@ -78,21 +79,21 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <header className="text-center mb-12 space-y-6">
           <div className="mb-4">
-            <h2 className="text-3xl md:text-8xl font-bold">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold">
               <span className="text-primary">By</span>
               <span className="text-red">IITians</span>
             </h2>
           </div>
          
-          <div className="inline-block px-6 py-2 bg-primary/10 rounded-full border-2 border-primary/20">
-            <p className="text-lg font-semibold text-primary">
+          <div className="inline-block px-4 sm:px-6 py-2 bg-primary/10 rounded-full border-2 border-primary/20">
+            <p className="text-sm sm:text-base md:text-lg font-semibold text-primary">
               For: IIT | NEET | CBSE | NTSE | Foundation | Class 8 to 12
             </p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-primary">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary">
             Always Build Concepts
           </h1>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto font-medium">
+          <p className="text-base sm:text-lg text-foreground/70 max-w-2xl mx-auto font-medium">
             Access all your learning resources in one place. Select a category below to get started.
           </p>
           {isAdmin && (
@@ -139,6 +140,25 @@ const Index = () => {
             description="View our information brochure"
             icon="FileText"
           />
+          
+          {/* Olympiad Aptitude Test Registration Card */}
+          <Link to="/olympiad-registration" className="block group">
+            <Card className="h-full transition-all duration-300 hover:shadow-card-hover hover:scale-[1.02] border-4 border-primary/20 hover:border-primary rounded-3xl overflow-hidden bg-gradient-to-br from-card to-primary/5">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-primary group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Settings className="h-10 w-10 text-primary-foreground" />
+                </div>
+                <CardTitle className="text-2xl font-bold text-primary group-hover:text-red transition-colors">
+                  Olympiad Registration
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-center pb-6">
+                <CardDescription className="text-base text-foreground/70 font-medium">
+                  Register for Olympiad Aptitude Test - Fee ₹225
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
 
         <footer className="text-center text-sm text-foreground/60 mt-16 pb-8 space-y-4">

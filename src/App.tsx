@@ -11,6 +11,8 @@ import StudyMaterialDetail from "./pages/StudyMaterialDetail";
 import CategoryDetail from "./pages/CategoryDetail";
 import ClassDetail from "./pages/ClassDetail";
 import SubjectDetail from "./pages/SubjectDetail";
+import OlympiadRegistration from "./pages/OlympiadRegistration";
+import PaymentSuccess from "./pages/PaymentSuccess";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/olympiad-registration" element={<OlympiadRegistration />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/study-material/:id" element={<StudyMaterialDetail />} />
           <Route path="/study-material/:id/class/:classNum" element={<ClassDetail />} />
           <Route path="/study-material/:id/class/:classNum/subject/:subject" element={<SubjectDetail />} />
