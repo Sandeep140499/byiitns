@@ -152,45 +152,45 @@ export default function Payment() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/10">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-6 sm:py-8 max-w-6xl lg:max-w-7xl">
         <Button
           variant="ghost"
           onClick={() => navigate(-1)}
-          className="mb-6 text-muted-foreground hover:text-primary"
+          className="mb-4 sm:mb-6 text-muted-foreground hover:text-primary"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back
         </Button>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-2 gap-4 lg:gap-6">
           {/* Payment Form */}
           <Card className="rounded-2xl shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold flex items-center gap-2">
-                <CreditCard className="h-6 w-6" />
+            <CardHeader className="pb-4 sm:pb-6">
+              <CardTitle className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                <CreditCard className="h-5 w-5 sm:h-6 sm:w-6" />
                 Payment Information
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-sm sm:text-base">
                 Enter your details to complete the payment
               </CardDescription>
             </CardHeader>
 
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 sm:space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
                 <Input
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Enter your full name"
-                  className="rounded-lg"
+                  className="rounded-lg text-sm sm:text-base h-10 sm:h-11"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
+                <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
                 <Input
                   id="email"
                   name="email"
@@ -198,41 +198,41 @@ export default function Payment() {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="Enter your email"
-                  className="rounded-lg"
+                  className="rounded-lg text-sm sm:text-base h-10 sm:h-11"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
+                <Label htmlFor="phone" className="text-sm font-medium">Phone Number</Label>
                 <Input
                   id="phone"
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="Enter your phone number"
-                  className="rounded-lg"
+                  className="rounded-lg text-sm sm:text-base h-10 sm:h-11"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="amount">Amount (₹)</Label>
+                <Label htmlFor="amount" className="text-sm font-medium">Amount (₹)</Label>
                 <Input
                   id="amount"
                   name="amount"
                   value={formData.amount}
                   onChange={handleInputChange}
                   placeholder="Enter amount"
-                  className="rounded-lg"
+                  className="rounded-lg text-sm sm:text-base h-10 sm:h-11"
                   disabled
                 />
               </div>
 
               <div className="space-y-2">
-                <Label>Payment Method</Label>
+                <Label className="text-sm font-medium">Payment Method</Label>
                 <Select value={formData.paymentMethod} onValueChange={handlePaymentMethodChange}>
-                  <SelectTrigger className="rounded-lg">
+                  <SelectTrigger className="rounded-lg text-sm sm:text-base h-10 sm:h-11">
                     <SelectValue placeholder="Select payment method" />
                   </SelectTrigger>
                   <SelectContent>
@@ -244,12 +244,12 @@ export default function Payment() {
                 </Select>
               </div>
 
-              <div className="flex gap-3 pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 <Button
                   onClick={sendPaymentLinkEmail}
                   variant="outline"
                   disabled={isLoading || !formData.email}
-                  className="flex-1 rounded-lg"
+                  className="flex-1 rounded-lg h-10 sm:h-11 text-sm sm:text-base"
                 >
                   {isLoading ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -262,7 +262,7 @@ export default function Payment() {
                 <Button
                   onClick={handlePaymentConfirmation}
                   disabled={isLoading || !formData.name || !formData.email}
-                  className="flex-1 rounded-lg"
+                  className="flex-1 rounded-lg h-10 sm:h-11 text-sm sm:text-base"
                 >
                   {isLoading ? (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -277,22 +277,22 @@ export default function Payment() {
 
           {/* Payment Instructions */}
           <Card className="rounded-2xl shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold flex items-center gap-2">
-                <Smartphone className="h-6 w-6" />
+            <CardHeader className="pb-4 sm:pb-6">
+              <CardTitle className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                <Smartphone className="h-5 w-5 sm:h-6 sm:w-6" />
                 Payment Instructions
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-sm sm:text-base">
                 Follow these steps to complete your payment
               </CardDescription>
             </CardHeader>
 
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4 sm:space-y-6">
               {formData.paymentMethod === "upi" && (
                 <div className="space-y-4">
-                  <div className="bg-blue-50 dark:bg-blue-950/30 border-2 border-blue-200 dark:border-blue-800 rounded-xl p-4">
-                    <h3 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">UPI Payment</h3>
-                    <ol className="space-y-2 text-blue-900 dark:text-blue-200 text-sm list-decimal list-inside">
+                  <div className="bg-blue-50 dark:bg-blue-950/30 border-2 border-blue-200 dark:border-blue-800 rounded-xl p-4 sm:p-6">
+                    <h3 className="font-semibold text-blue-900 dark:text-blue-300 mb-3 text-base sm:text-lg">UPI Payment</h3>
+                    <ol className="space-y-2 text-blue-900 dark:text-blue-200 text-sm sm:text-base list-decimal list-inside">
                       <li>Scan the QR code with your UPI app</li>
                       <li>Enter the amount: ₹{formData.amount}</li>
                       <li>Complete the payment</li>
@@ -301,11 +301,11 @@ export default function Payment() {
                   </div>
                   
                   <div className="flex justify-center">
-                    <div className="bg-white p-4 rounded-xl border-2 border-foreground/20">
+                    <div className="bg-white p-3 sm:p-4 rounded-xl border-2 border-foreground/20 max-w-[200px] sm:max-w-none">
                       <img 
                         src={paymentQR} 
                         alt="Payment QR Code" 
-                        className="w-48 h-48 object-contain"
+                        className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain mx-auto"
                       />
                     </div>
                   </div>
@@ -313,9 +313,9 @@ export default function Payment() {
               )}
 
               {formData.paymentMethod === "card" && (
-                <div className="bg-green-50 dark:bg-green-950/30 border-2 border-green-200 dark:border-green-800 rounded-xl p-4">
-                  <h3 className="font-semibold text-green-900 dark:text-green-300 mb-2">Card Payment</h3>
-                  <ol className="space-y-2 text-green-900 dark:text-green-200 text-sm list-decimal list-inside">
+                <div className="bg-green-50 dark:bg-green-950/30 border-2 border-green-200 dark:border-green-800 rounded-xl p-4 sm:p-6">
+                  <h3 className="font-semibold text-green-900 dark:text-green-300 mb-3 text-base sm:text-lg">Card Payment</h3>
+                  <ol className="space-y-2 text-green-900 dark:text-green-200 text-sm sm:text-base list-decimal list-inside">
                     <li>Click "Send Payment Link" to receive payment link</li>
                     <li>Check your email for the payment link</li>
                     <li>Click the link to enter card details</li>
@@ -326,9 +326,9 @@ export default function Payment() {
               )}
 
               {formData.paymentMethod === "netbanking" && (
-                <div className="bg-purple-50 dark:bg-purple-950/30 border-2 border-purple-200 dark:border-purple-800 rounded-xl p-4">
-                  <h3 className="font-semibold text-purple-900 dark:text-purple-300 mb-2">Net Banking</h3>
-                  <ol className="space-y-2 text-purple-900 dark:text-purple-200 text-sm list-decimal list-inside">
+                <div className="bg-purple-50 dark:bg-purple-950/30 border-2 border-purple-200 dark:border-purple-800 rounded-xl p-4 sm:p-6">
+                  <h3 className="font-semibold text-purple-900 dark:text-purple-300 mb-3 text-base sm:text-lg">Net Banking</h3>
+                  <ol className="space-y-2 text-purple-900 dark:text-purple-200 text-sm sm:text-base list-decimal list-inside">
                     <li>Click "Send Payment Link" to receive payment link</li>
                     <li>Check your email for the payment link</li>
                     <li>Select your bank from the list</li>
@@ -339,9 +339,9 @@ export default function Payment() {
               )}
 
               {formData.paymentMethod === "wallet" && (
-                <div className="bg-orange-50 dark:bg-orange-950/30 border-2 border-orange-200 dark:border-orange-800 rounded-xl p-4">
-                  <h3 className="font-semibold text-orange-900 dark:text-orange-300 mb-2">Wallet Payment</h3>
-                  <ol className="space-y-2 text-orange-900 dark:text-orange-200 text-sm list-decimal list-inside">
+                <div className="bg-orange-50 dark:bg-orange-950/30 border-2 border-orange-200 dark:border-orange-800 rounded-xl p-4 sm:p-6">
+                  <h3 className="font-semibold text-orange-900 dark:text-orange-300 mb-3 text-base sm:text-lg">Wallet Payment</h3>
+                  <ol className="space-y-2 text-orange-900 dark:text-orange-200 text-sm sm:text-base list-decimal list-inside">
                     <li>Click "Send Payment Link" to receive payment link</li>
                     <li>Check your email for the payment link</li>
                     <li>Select your wallet (Paytm, PhonePe, etc.)</li>
@@ -352,23 +352,23 @@ export default function Payment() {
               )}
 
               {isEmailSent && (
-                <div className="bg-green-50 dark:bg-green-950/30 border-2 border-green-200 dark:border-green-800 rounded-xl p-4">
+                <div className="bg-green-50 dark:bg-green-950/30 border-2 border-green-200 dark:border-green-800 rounded-xl p-4 sm:p-6">
                   <div className="flex items-center gap-2 text-green-900 dark:text-green-300">
                     <CheckCircle2 className="h-5 w-5" />
-                    <span className="font-semibold">Payment link sent successfully!</span>
+                    <span className="font-semibold text-sm sm:text-base">Payment link sent successfully!</span>
                   </div>
-                  <p className="text-green-900 dark:text-green-200 text-sm mt-1">
+                  <p className="text-green-900 dark:text-green-200 text-sm sm:text-base mt-2">
                     Please check your email at {formData.email}
                   </p>
                 </div>
               )}
 
-              <div className="bg-amber-50 dark:bg-amber-950/30 border-2 border-amber-200 dark:border-amber-800 rounded-xl p-4">
+              <div className="bg-amber-50 dark:bg-amber-950/30 border-2 border-amber-200 dark:border-amber-800 rounded-xl p-4 sm:p-6">
                 <div className="flex items-center gap-2 text-amber-900 dark:text-amber-300">
-                  <AlertCircle className="h-5 w-5" />
-                  <span className="font-semibold">Important Note</span>
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                  <span className="font-semibold text-sm sm:text-base">Important Note</span>
                 </div>
-                <p className="text-amber-900 dark:text-amber-200 text-sm mt-1">
+                <p className="text-amber-900 dark:text-amber-200 text-sm sm:text-base mt-2">
                   After completing the payment, don't forget to click the "Confirm Payment" button above to finalize your registration.
                 </p>
               </div>

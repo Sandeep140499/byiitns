@@ -27,116 +27,117 @@ export const InvoiceTemplate = React.forwardRef<
   return (
     <div
       ref={ref}
-      className="bg-white text-black p-8 max-w-4xl mx-auto"
+      className="bg-white text-black p-4 sm:p-6 lg:p-8 max-w-4xl mx-auto print:p-4"
       style={{ pageBreakAfter: "always" }}
     >
       {/* Header */}
-      <div className="text-center mb-6 border-b-2 border-gray-300 pb-4">
-        <h1 className="text-4xl font-bold text-red-600">ByIITians</h1>
-        <p className="text-sm text-gray-600 mt-1">Always Build Concepts</p>
+      <div className="text-center mb-4 sm:mb-6 border-b-2 border-gray-300 pb-3 sm:pb-4">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-600">ByIITians</h1>
+        <p className="text-xs sm:text-sm text-gray-600 mt-1">Always Build Concepts</p>
         <p className="text-xs text-gray-500">Delhi | NEET | IIT | CBSE | NTSE | Foundation</p>
       </div>
 
       {/* Invoice Title */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
         <div>
-          <h2 className="text-2xl font-bold">REGISTRATION INVOICE</h2>
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">REGISTRATION INVOICE</h2>
         </div>
-        <div className="text-sm">
+        <div className="text-xs sm:text-sm">
           <p className="font-bold">Invoice No:</p>
-          <p className="text-lg font-mono font-bold text-red-600">{serialNumber}</p>
+          <p className="text-base sm:text-lg font-mono font-bold text-red-600 break-all">{serialNumber}</p>
         </div>
-        <div className="text-sm text-right">
+        <div className="text-xs sm:text-sm text-right">
           <p className="font-bold">Date:</p>
           <p>{new Date().toLocaleDateString("en-IN")}</p>
-          <p className="font-bold mt-2">Status:</p>
-          <p className="text-red-600 font-bold">PENDING VERIFICATION</p>
+          <p className="font-bold mt-1 sm:mt-2">Status:</p>
+          <p className="text-red-600 font-bold text-xs sm:text-sm">PENDING VERIFICATION</p>
         </div>
       </div>
 
       {/* Student Information */}
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-3 bg-gray-100 p-2">STUDENT INFORMATION</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="border p-3">
+      <div className="mb-6 sm:mb-8">
+        <h3 className="text-base sm:text-lg font-bold mb-3 bg-gray-100 p-2">STUDENT INFORMATION</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">NAME</p>
-            <p className="font-semibold">{formData.name}</p>
+            <p className="font-semibold text-sm sm:text-base">{formData.name}</p>
           </div>
-          <div className="border p-3">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">PHONE NUMBER</p>
-            <p className="font-semibold">{formData.phoneNumber}</p>
+            <p className="font-semibold text-sm sm:text-base">{formData.phoneNumber}</p>
           </div>
-          <div className="border p-3">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">FATHER'S NAME</p>
-            <p className="font-semibold">{formData.fatherName}</p>
+            <p className="font-semibold text-sm sm:text-base">{formData.fatherName}</p>
           </div>
-          <div className="border p-3">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">EMAIL</p>
-            <p className="font-semibold text-sm break-all">{formData.email}</p>
+            <p className="font-semibold text-xs sm:text-sm break-all">{formData.email}</p>
           </div>
         </div>
       </div>
 
       {/* Academic Information */}
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-3 bg-gray-100 p-2">ACADEMIC INFORMATION</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="border p-3">
+      <div className="mb-6 sm:mb-8">
+        <h3 className="text-base sm:text-lg font-bold mb-3 bg-gray-100 p-2">ACADEMIC INFORMATION</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">CLASS</p>
-            <p className="font-semibold">{formData.class}</p>
+            <p className="font-semibold text-sm sm:text-base">{formData.class}</p>
           </div>
-          <div className="border p-3">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">SECTION</p>
-            <p className="font-semibold">{formData.section || "N/A"}</p>
+            <p className="font-semibold text-sm sm:text-base">{formData.section || "N/A"}</p>
           </div>
-          <div className="border p-3">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">ROLL NUMBER</p>
-            <p className="font-semibold">{formData.rollNumber || "N/A"}</p>
+            <p className="font-semibold text-sm sm:text-base">{formData.rollNumber || "N/A"}</p>
           </div>
-          <div className="border p-3">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">GENDER</p>
-            <p className="font-semibold">{formData.gender || "N/A"}</p>
+            <p className="font-semibold text-sm sm:text-base">{formData.gender || "N/A"}</p>
           </div>
         </div>
-        <div className="border p-3 mt-2">
+        <div className="border p-2 sm:p-3 mt-2">
           <p className="text-xs font-bold text-gray-600">SCHOOL NAME</p>
-          <p className="font-semibold">{formData.schoolName}</p>
+          <p className="font-semibold text-sm sm:text-base">{formData.schoolName}</p>
         </div>
-        <div className="grid grid-cols-2 gap-4 mt-2">
-          <div className="border p-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mt-2">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">CITY</p>
-            <p className="font-semibold">{formData.city || "N/A"}</p>
+            <p className="font-semibold text-sm sm:text-base">{formData.city || "N/A"}</p>
           </div>
-          <div className="border p-3">
+          <div className="border p-2 sm:p-3">
             <p className="text-xs font-bold text-gray-600">PERCENTAGE / GRADE</p>
-            <p className="font-semibold">{formData.percentage || "N/A"}</p>
+            <p className="font-semibold text-sm sm:text-base">{formData.percentage || "N/A"}</p>
           </div>
         </div>
       </div>
 
       {/* Fee Summary */}
-      <div className="mb-8 border-2 border-gray-300 p-4">
+      <div className="mb-6 sm:mb-8 border-2 border-gray-300 p-3 sm:p-4">
         <div className="flex justify-between mb-3">
-          <span className="font-bold">Test Details:</span>
-          <span>Olympiad Aptitude Test Registration</span>
+          <span className="font-bold text-sm sm:text-base">Test Details:</span>
+          <span className="text-sm sm:text-base">Olympiad Aptitude Test Registration</span>
         </div>
-        <div className="flex justify-between text-lg font-bold border-t-2 pt-3">
+        <div className="flex justify-between text-base sm:text-lg font-bold border-t-2 pt-3">
           <span>Total Amount</span>
-          <span className="text-2xl text-red-600">₹225</span>
+          <span className="text-xl sm:text-2xl text-red-600">₹225</span>
         </div>
       </div>
 
       {/* Payment Instructions */}
-      <div className="mb-8 bg-blue-50 p-4 border-l-4 border-blue-500">
-        <h3 className="font-bold mb-3">PAYMENT INSTRUCTIONS</h3>
-        <ol className="text-sm space-y-2 list-decimal list-inside">
-          <li>Scan the PayTM QR code to complete the payment of ₹225</li>
+      <div className="mb-6 sm:mb-8 bg-blue-50 p-3 sm:p-4 border-l-4 border-blue-500">
+        <h3 className="font-bold mb-3 text-sm sm:text-base">PAYMENT INSTRUCTIONS</h3>
+        <ol className="text-xs sm:text-sm space-y-2 list-decimal list-inside">
+          <li>Scan PayTM QR code to complete payment of ₹225</li>
           <li>Save your PayTM payment screenshot</li>
           <li>
-            Send the screenshot along with this invoice number (<strong>{serialNumber}</strong>) to: Suman Kumar
+            Send screenshot along with this invoice number (<strong>{serialNumber}</strong>) to: Suman Kumar
           </li>
           <li>WhatsApp: +91 8447412646</li>
           <li>Your application will be verified upon receipt of payment</li>
+          <li className="text-red-600 font-bold">OR visit: <a href="/payment" className="underline">Pay Online Instantly</a></li>
         </ol>
       </div>
 
@@ -291,10 +292,10 @@ export const InvoiceDownloadButton = ({ formData, serialNumber }: InvoiceDownloa
   };
 
   return (
-    <div className="flex gap-3">
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
       <Button
         onClick={handleDownloadPDF}
-        className="flex-1 rounded-xl h-11 bg-primary hover:bg-primary/90 font-bold"
+        className="flex-1 rounded-xl h-10 sm:h-11 bg-primary hover:bg-primary/90 font-bold text-sm sm:text-base"
       >
         <Download className="mr-2 h-4 w-4" />
         Download Invoice PDF
@@ -302,7 +303,7 @@ export const InvoiceDownloadButton = ({ formData, serialNumber }: InvoiceDownloa
       <Button
         onClick={() => window.print()}
         variant="outline"
-        className="flex-1 rounded-xl h-11 border-2 font-bold"
+        className="flex-1 rounded-xl h-10 sm:h-11 border-2 font-bold text-sm sm:text-base"
       >
         <Printer className="mr-2 h-4 w-4" />
         Print Invoice

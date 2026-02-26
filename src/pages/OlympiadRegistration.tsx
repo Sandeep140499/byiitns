@@ -168,22 +168,26 @@ export default function OlympiadRegistration() {
               </CardDescription>
             </CardHeader>
             {/* Prize reminder */}
-            <div className="flex justify-center gap-8 my-4">
+            <div className="flex justify-center gap-4 sm:gap-6 lg:gap-8 my-4">
               <div className="text-center">
-                <img
-                  src="https://via.placeholder.com/60x60?text=1st"
-                  alt="1st Prize Laptop"
-                  className="mx-auto h-16 w-16 object-contain animate-pulse"
-                />
-                                <p className="text-xs mt-1 font-semibold">🏆 Premium Laptop</p>
+                <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 p-3 sm:p-4 rounded-xl border-2 border-yellow-300 shadow-lg">
+                  <img
+                    src="https://via.placeholder.com/60x60?text=1st"
+                    alt="1st Prize Laptop"
+                    className="mx-auto h-12 w-12 sm:h-16 sm:w-16 object-contain animate-pulse"
+                  />
+                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-yellow-800">🏆 Premium Laptop</p>
+                </div>
               </div>
               <div className="text-center">
-                <img
-                  src="https://via.placeholder.com/60x60?text=2nd"
-                  alt="2nd Prize Tablet"
-                  className="mx-auto h-16 w-16 object-contain animate-pulse"
-                />
-                                <p className="text-xs mt-1 font-semibold">🥈 Advanced Tablet</p>
+                <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-3 sm:p-4 rounded-xl border-2 border-gray-300 shadow-lg">
+                  <img
+                    src="https://via.placeholder.com/60x60?text=2nd"
+                    alt="2nd Prize Tablet"
+                    className="mx-auto h-12 w-12 sm:h-16 sm:w-16 object-contain animate-pulse"
+                  />
+                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-gray-800">🥈 Advanced Tablet</p>
+                </div>
               </div>
             </div>
 

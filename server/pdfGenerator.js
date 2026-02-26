@@ -24,117 +24,149 @@ export function generateInvoicePDF(formData, serialNumber) {
         reject(err);
       });
 
-      // Header with branding
-      doc
-        .fontSize(28)
+      // Define brand colors
+      const primaryColor = "#d32f2f"; // ByIITians red
+      const secondaryColor = "#1a1a1a"; // Dark black
+      const accentColor = "#f5f5f5"; // Light gray
+
+      // Header with branding and colors
+      doc.fillColor(primaryColor)
+        .fontSize(32)
         .font("Helvetica-Bold")
         .text("ByIITians", { align: "center" })
-        .fontSize(11)
+        .fillColor(secondaryColor)
+        .fontSize(12)
         .font("Helvetica")
         .text("Always Build Concepts", { align: "center" })
-        .fontSize(9)
+        .fontSize(10)
+        .fillColor("#666666")
         .text("Delhi | NEET | IIT | CBSE | NTSE | Foundation", { align: "center" });
 
-      doc.moveTo(40, 90).lineTo(555, 90).stroke();
+      // Decorative line with brand color
+      doc.strokeColor(primaryColor)
+        .lineWidth(2)
+        .moveTo(40, 90)
+        .lineTo(555, 90)
+        .stroke();
 
-      // Invoice details header
-      doc
-        .fontSize(16)
+      // Invoice details header with brand colors
+      doc.fillColor(primaryColor)
+        .fontSize(18)
         .font("Helvetica-Bold")
         .text("REGISTRATION INVOICE", 40, 110);
 
       // Invoice and serial number
-      doc
-        .fontSize(10)
+      doc.fillColor(secondaryColor)
+        .fontSize(12)
         .font("Helvetica-Bold")
         .text("Invoice No:", 40, 140)
-        .font("Helvetica")
-        .fontSize(11)
+        .fillColor(primaryColor)
+        .fontSize(14)
+        .font("Helvetica-Bold")
         .text(serialNumber, 150, 140);
 
-      doc
-        .fontSize(10)
+      doc.fillColor(secondaryColor)
+        .fontSize(12)
         .font("Helvetica-Bold")
         .text("Date:", 40, 160)
-        .font("Helvetica")
+        .fillColor("#333333")
         .fontSize(11)
+        .font("Helvetica")
         .text(new Date().toLocaleDateString("en-IN"), 150, 160);
 
-      doc
-        .fontSize(10)
+      doc.fillColor(primaryColor)
+        .fontSize(12)
         .font("Helvetica-Bold")
         .text("Status:", 40, 180)
-        .font("Helvetica")
+        .fillColor("#ff6b6b")
         .fontSize(11)
-        .text("PENDING PAYMENT VERIFICATION", 150, 180, { color: "#d32f2f" });
+        .font("Helvetica-Bold")
+        .text("PENDING PAYMENT VERIFICATION", 150, 180);
 
-      doc.moveTo(40, 210).lineTo(555, 210).stroke();
+      // Decorative line
+      doc.strokeColor(primaryColor)
+        .lineWidth(2)
+        .moveTo(40, 210)
+        .lineTo(555, 210)
+        .stroke();
 
-      // Student Information Section
-      doc
-        .fontSize(12)
+      // Student Information Section with brand colors
+      doc.fillColor(primaryColor)
+        .fontSize(14)
         .font("Helvetica-Bold")
         .text("STUDENT INFORMATION", 40, 230);
 
       const studentInfoY = 255;
       const infoBoxHeight = 110;
 
-      doc
+      // Student info boxes with better styling
+      doc.strokeColor("#cccccc")
+        .lineWidth(1)
         .rect(40, studentInfoY, 255, infoBoxHeight)
         .stroke();
 
-      doc
-        .fontSize(10)
+      doc.fillColor(secondaryColor)
+        .fontSize(11)
         .font("Helvetica-Bold")
         .text("Name:", 50, studentInfoY + 10)
+        .fillColor("#333333")
+        .fontSize(12)
         .font("Helvetica")
         .text(formData.name, 50, studentInfoY + 28);
 
-      doc
+      doc.fillColor(secondaryColor)
         .font("Helvetica-Bold")
         .text("Father's Name:", 50, studentInfoY + 50)
+        .fillColor("#333333")
         .font("Helvetica")
         .text(formData.fatherName, 50, studentInfoY + 68);
 
       // Right side of student info
-      doc
+      doc.strokeColor("#cccccc")
         .rect(305, studentInfoY, 250, infoBoxHeight)
         .stroke();
 
-      doc
-        .fontSize(10)
+      doc.fillColor(secondaryColor)
+        .fontSize(11)
         .font("Helvetica-Bold")
         .text("Phone:", 315, studentInfoY + 10)
+        .fillColor("#333333")
+        .fontSize(12)
         .font("Helvetica")
         .text(formData.phoneNumber, 315, studentInfoY + 28);
 
-      doc
+      doc.fillColor(secondaryColor)
         .font("Helvetica-Bold")
         .text("Email:", 315, studentInfoY + 50)
+        .fillColor("#333333")
+        .fontSize(10)
         .font("Helvetica")
-        .fontSize(9)
         .text(formData.email, 315, studentInfoY + 68);
 
       // Academic Information Section
-      const academicY = studentInfoY + infoBoxHeight + 30;
+      const academicY = studentInfoY + 20;
 
-      doc
-        .fontSize(12)
+      // Academic Information Section with brand colors
+      doc.fillColor(primaryColor)
+        .fontSize(14)
         .font("Helvetica-Bold")
         .text("ACADEMIC INFORMATION", 40, academicY);
 
       const academicBoxY = academicY + 25;
       const academicBoxHeight = 130;
 
-      // Left side academic info
-      doc
+      // Left side academic info with better styling
+      doc.strokeColor("#cccccc")
+        .lineWidth(1)
         .rect(40, academicBoxY, 255, academicBoxHeight)
         .stroke();
 
-      doc
-        .fontSize(10)
+      doc.fillColor(secondaryColor)
+        .fontSize(11)
         .font("Helvetica-Bold")
         .text("Class:", 50, academicBoxY + 10)
+        .fillColor("#333333")
+        .fontSize(12)
         .font("Helvetica")
         .text(formData.class, 50, academicBoxY + 28);
 
@@ -176,78 +208,81 @@ export function generateInvoicePDF(formData, serialNumber) {
         .font("Helvetica")
         .text(formData.percentage || "N/A", 315, academicBoxY + 123);
 
-      // Fee Summary
+      // Fee Summary with brand colors
       const feeY = academicBoxY + academicBoxHeight + 30;
 
-      doc
+      doc.strokeColor(primaryColor)
+        .lineWidth(2)
         .rect(40, feeY, 515, 70)
         .stroke();
 
-      doc
-        .fontSize(11)
+      doc.fillColor(primaryColor)
+        .fontSize(12)
         .font("Helvetica-Bold")
         .text("TEST DETAILS & FEE", 50, feeY + 10);
 
-      doc
-        .fontSize(10)
+      doc.fillColor("#333333")
+        .fontSize(11)
         .font("Helvetica")
         .text("Olympiad Aptitude Test Registration", 50, feeY + 30);
 
-      doc
-        .fontSize(11)
+      doc.fillColor(primaryColor)
+        .fontSize(14)
         .font("Helvetica-Bold")
         .text("₹225", 480, feeY + 28, { align: "right" });
 
-      doc
-        .fontSize(10)
+      doc.fillColor(secondaryColor)
+        .fontSize(11)
         .font("Helvetica-Bold")
         .text("Registration Fee:", 50, feeY + 50);
 
-      // Total
+      // Total with brand colors
       const totalY = feeY + 80;
 
-      doc
+      doc.fillColor(primaryColor)
+        .lineWidth(2)
         .rect(40, totalY, 515, 50)
         .stroke();
 
-      doc
-        .fontSize(12)
+      doc.fillColor(secondaryColor)
+        .fontSize(14)
         .font("Helvetica-Bold")
         .text("Total Amount", 50, totalY + 12);
 
-      doc
-        .fontSize(16)
+      doc.fillColor(primaryColor)
+        .fontSize(20)
         .font("Helvetica-Bold")
         .text("₹225", 480, totalY + 8, { align: "right" });
 
-      // Payment Instructions
+      // Payment Instructions with better styling
       const instructionsY = totalY + 60;
 
-      doc
+      doc.strokeColor(primaryColor)
+        .lineWidth(2)
         .moveTo(40, instructionsY)
         .lineTo(555, instructionsY)
         .stroke();
 
-      doc
-        .fontSize(11)
+      doc.fillColor(primaryColor)
+        .fontSize(14)
         .font("Helvetica-Bold")
         .text("PAYMENT INSTRUCTIONS", 40, instructionsY + 15);
 
-      doc
-        .fontSize(9)
+      doc.fillColor("#333333")
+        .fontSize(10)
         .font("Helvetica")
         .text(
-          "1. Scan the PayTM QR code to complete the payment of ₹225",
+          "1. Scan PayTM QR code to complete payment of ₹225",
           40,
           instructionsY + 35
         )
         .text(
-          "2. Save the PayTM payment screenshot",
+          "2. Save your PayTM payment screenshot",
           40,
           instructionsY + 55
         )
         .text(
-          "3. Send the screenshot along with this invoice number to: Suman Kumar (WhatsApp: +91 8447412646)",
+          "3. Send screenshot along with this invoice number to: Suman Kumar (WhatsApp: +91 8447412646)",
           40,
           instructionsY + 75
         )
@@ -256,6 +291,26 @@ export function generateInvoicePDF(formData, serialNumber) {
           40,
           instructionsY + 95
         );
+
+      // Add payment URL section
+      doc.fillColor(accentColor)
+        .rect(40, instructionsY + 120, 515, 40)
+        .stroke();
+      
+      doc.fillColor(primaryColor)
+        .fontSize(12)
+        .font("Helvetica-Bold")
+        .text("💳 PAY ONLINE (INSTANT VERIFICATION)", 50, instructionsY + 135);
+      
+      doc.fillColor("#333333")
+        .fontSize(10)
+        .font("Helvetica")
+        .text("Visit: https://your-domain.com/payment", 50, instructionsY + 155);
+      
+      doc.fillColor("#666666")
+        .fontSize(9)
+        .font("Helvetica")
+        .text("Click the link above for instant payment verification", 50, instructionsY + 170);
 
       // Footer
       doc

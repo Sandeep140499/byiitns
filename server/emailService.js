@@ -322,7 +322,14 @@ export async function sendRegistrationEmails(formData) {
           <li>Save your payment screenshot</li>
           <li>Send the screenshot along with your serial number (${serialNumber}) to Suman Kumar</li>
           <li>WhatsApp: +91 8447412646</li>
+          <li><strong>OR</strong> Click the button below for instant online payment</li>
         </ol>
+        
+        <div style="text-align: center; margin: 20px 0;">
+          <a href="https://your-domain.com/payment" style="display: inline-block; background-color: #d32f2f; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+            💳 Pay Online Instantly
+          </a>
+        </div>
         
         <p>The detailed invoice has been attached to this email. Please download and keep it safe.</p>
         

@@ -90,9 +90,9 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/10">
       {/* Olympiad registration promotional popup */}
       <Dialog open={showOlympiadPopup} onOpenChange={setShowOlympiadPopup}>
-        <DialogContent>
+        <DialogContent className="max-w-[95vw] sm:max-w-lg md:max-w-2xl lg:max-w-4xl max-h-[90vh] sm:max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary mb-2">
+            <h2 className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary mb-2">
               By<span className="text-red">IITians</span>
             </h2>
             <DialogTitle className="text-center text-xl font-bold">
@@ -106,30 +106,36 @@ const Index = () => {
                 Registration fee ₹225
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row justify-center gap-6 my-4">
-              <div className="text-center animate-[bounce_1s_5] transform transition-transform hover:scale-110 duration-200">
-                <img
-                  src="https://crdms.images.consumerreports.org/f_auto,w_1200/prod/products/cr/models/417151-15-to-16-inch-laptops-dell-inspiron-15-6-10044427.png"
-                  alt="1st Prize Laptop"
-                  className="mx-auto h-32 w-32 sm:h-40 sm:w-40 object-contain"
-                />
-                                <p className="text-sm mt-1 font-semibold">🏆 Premium Laptop</p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 my-4">
+              <div className="text-center">
+                <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 p-2 sm:p-4 rounded-xl border-2 border-yellow-300 shadow-lg">
+                  <img
+                    src="https://crdms.images.consumerreports.org/f_auto,w_1200/prod/products/cr/models/417151-15-to-16-inch-laptops-dell-inspiron-15-6-10044427.png"
+                    alt="1st Prize Laptop"
+                    className="mx-auto h-20 w-20 sm:h-32 sm:w-32 object-contain"
+                  />
+                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-yellow-800">🏆 Premium Laptop</p>
+                </div>
               </div>
-              <div className="text-center animate-[bounce_1s_5] transform transition-transform hover:scale-110 duration-200">
-                <img
-                  src="https://freepngimg.com/save/17293-tablet-free-png-image/672x450"
-                  alt="2nd Prize Tablet"
-                  className="mx-auto h-32 w-32 sm:h-40 sm:w-40 object-contain"
-                />
-                                <p className="text-sm mt-1 font-semibold">🥈 Advanced Tablet</p>
+              <div className="text-center">
+                <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-2 sm:p-4 rounded-xl border-2 border-gray-300 shadow-lg">
+                  <img
+                    src="https://freepngimg.com/save/17293-tablet-free-png-image/672x450"
+                    alt="2nd Prize Tablet"
+                    className="mx-auto h-20 w-20 sm:h-32 sm:w-32 object-contain"
+                  />
+                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-gray-800">🥈 Advanced Tablet</p>
+                </div>
               </div>
-              <div className="text-center animate-[bounce_1s_5] transform transition-transform hover:scale-110 duration-200">
-                <img
-                  src="https://pngimg.com/d/tablet_PNG8600.png"
-                  alt="3rd Prize Tablet"
-                  className="mx-auto h-32 w-32 sm:h-40 sm:w-40 object-contain"
-                />
-                                <p className="text-sm mt-1 font-semibold">🥉 Elite Tablet</p>
+              <div className="text-center">
+                <div className="bg-gradient-to-br from-orange-100 to-orange-200 p-2 sm:p-4 rounded-xl border-2 border-orange-300 shadow-lg">
+                  <img
+                    src="https://pngimg.com/d/tablet_PNG8600.png"
+                    alt="3rd Prize Tablet"
+                    className="mx-auto h-20 w-20 sm:h-32 sm:w-32 object-contain"
+                  />
+                  <p className="text-xs sm:text-sm mt-1 sm:mt-2 font-semibold text-orange-800">🥉 Elite Tablet</p>
+                </div>
               </div>
             </div>
             <DialogDescription className="text-center">
@@ -140,7 +146,7 @@ const Index = () => {
             <Button
               asChild
               variant="destructive"
-              className="rounded-full px-8 py-3 bg-red-600 hover:bg-red-700 text-white animate-[pulse_3s_infinite] transition-all duration-700 ease-in-out hover:animate-none"
+              className="rounded-full px-6 sm:px-8 py-2 sm:py-3 bg-red-600 hover:bg-red-700 text-white animate-[pulse_3s_infinite] transition-all duration-700 ease-in-out hover:animate-none"
             >
               <Link to="/olympiad-registration" onClick={() => setShowOlympiadPopup(false)}>
                 Register Now
