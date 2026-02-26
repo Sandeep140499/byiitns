@@ -4,10 +4,19 @@ import { supabase } from "@/integrations/supabase/client";
 import { SectionCard } from "@/components/SectionCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 import { Settings } from "lucide-react";
+// prize images replaced by external URLs
 import { toast } from "sonner";
 import { QRCodeSVG } from "qrcode.react";
-import logo from "@/assets/logo.png";
 
 interface Section {
   id: string;
@@ -22,10 +31,13 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [websiteUrl, setWebsiteUrl] = useState("");
+  const [showOlympiadPopup, setShowOlympiadPopup] = useState(false);
 
   useEffect(() => {
     fetchSections();
     checkAdminStatus();
+    // show popup the first time visitor arrives
+    setShowOlympiadPopup(true);
     // Get the current website URL
     if (typeof window !== "undefined") {
       setWebsiteUrl(window.location.origin);
@@ -76,15 +88,78 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/10">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <header className="text-center mb-12 space-y-6">
+      {/* Olympiad registration promotional popup */}
+      <Dialog open={showOlympiadPopup} onOpenChange={setShowOlympiadPopup}>
+        <DialogContent>
+          <DialogHeader>
+            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary mb-2">
+              By<span className="text-red">IITians</span>
+            </h2>
+            <DialogTitle className="text-center text-xl font-bold">
+              Olympiad Registration Open!
+            </DialogTitle>
+            <DialogDescription className="text-center">
+              Join our Maths &amp; Science Olympiad for classes 7–11.
+            </DialogDescription>
+            <div className="my-4">
+              <p className="text-center text-xl sm:text-lg font-semibold text-red animate-pulse">
+                Registration fee ₹225
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row justify-center gap-6 my-4">
+              <div className="text-center animate-[bounce_1s_5] transform transition-transform hover:scale-110 duration-200">
+                <img
+                  src="https://crdms.images.consumerreports.org/f_auto,w_1200/prod/products/cr/models/417151-15-to-16-inch-laptops-dell-inspiron-15-6-10044427.png"
+                  alt="1st Prize Laptop"
+                  className="mx-auto h-32 w-32 sm:h-40 sm:w-40 object-contain"
+                />
+                                <p className="text-sm mt-1 font-semibold">🏆 Premium Laptop</p>
+              </div>
+              <div className="text-center animate-[bounce_1s_5] transform transition-transform hover:scale-110 duration-200">
+                <img
+                  src="https://freepngimg.com/save/17293-tablet-free-png-image/672x450"
+                  alt="2nd Prize Tablet"
+                  className="mx-auto h-32 w-32 sm:h-40 sm:w-40 object-contain"
+                />
+                                <p className="text-sm mt-1 font-semibold">🥈 Advanced Tablet</p>
+              </div>
+              <div className="text-center animate-[bounce_1s_5] transform transition-transform hover:scale-110 duration-200">
+                <img
+                  src="https://pngimg.com/d/tablet_PNG8600.png"
+                  alt="3rd Prize Tablet"
+                  className="mx-auto h-32 w-32 sm:h-40 sm:w-40 object-contain"
+                />
+                                <p className="text-sm mt-1 font-semibold">🥉 Elite Tablet</p>
+              </div>
+            </div>
+            <DialogDescription className="text-center">
+              Click below to register and secure your spot.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="justify-center">
+            <Button
+              asChild
+              variant="destructive"
+              className="rounded-full px-8 py-3 bg-red-600 hover:bg-red-700 text-white animate-[pulse_3s_infinite] transition-all duration-700 ease-in-out hover:animate-none"
+            >
+              <a href="/olympiad-registration" onClick={() => setShowOlympiadPopup(false)}>
+                Register Now
+              </a>
+            </Button>
+          </DialogFooter>
+          <DialogClose />
+        </DialogContent>
+      </Dialog>
+
+      {/* Full-Width Header */}
+      <div className="w-full bg-gradient-to-b from-primary/10 to-transparent py-12 sm:py-16 md:py-20">
+        <div className="text-center space-y-6 px-4">
           <div className="mb-4">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold tracking-tight">
               <span className="text-primary">By</span>
               <span className="text-red">IITians</span>
             </h2>
           </div>
-         
           <div className="inline-block px-4 sm:px-6 py-2 bg-primary/10 rounded-full border-2 border-primary/20">
             <p className="text-sm sm:text-base md:text-lg font-semibold text-primary">
               For: IIT | NEET | CBSE | NTSE | Foundation | Class 8 to 12
@@ -104,8 +179,11 @@ const Index = () => {
               </Button>
             </Link>
           )}
-        </header>
+        </div>
+      </div>
 
+      {/* Content Grid Container */}
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
           {sections.map((section) => {
             // Comment out all cards except testSeries and Location & Centre

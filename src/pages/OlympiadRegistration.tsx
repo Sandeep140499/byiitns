@@ -59,6 +59,10 @@ export default function OlympiadRegistration() {
   };
 
   const validateForm = () => {
+    // Developer note: when running the app locally make sure your serverless
+    // functions are available (e.g. via `vercel dev` or a proxy). Otherwise
+    // fetch("/api/register") will fail with network errors and submissions
+    // appear to "fail". Check the browser console for network logs.
     if (
       !formData.name ||
       !formData.fatherName ||
@@ -101,6 +105,16 @@ export default function OlympiadRegistration() {
         body: JSON.stringify(formData),
       });
 
+      if (!response.ok) {
+        const errText = await response.text();
+        console.error("Registration API returned non-OK status", response.status, errText);
+        toast.error(
+          `Registration failed (status ${response.status}). Check console for details.`
+        );
+        setIsLoading(false);
+        return;
+      }
+
       const data = await response.json();
 
       if (data.success) {
@@ -112,7 +126,7 @@ export default function OlympiadRegistration() {
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Failed to submit registration. Please check your connection.");
+      toast.error("Failed to submit registration. Please check your connection or backend server.");
     } finally {
       setIsLoading(false);
     }
@@ -121,7 +135,20 @@ export default function OlympiadRegistration() {
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/10">
-        <div className="container mx-auto px-4 py-8 max-w-2xl">
+        {/* Full-Width Header */}
+        <div className="w-full bg-gradient-to-b from-primary/10 to-transparent py-12 sm:py-16 md:py-20">
+          <div className="text-center space-y-4">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight px-4">
+              <span className="text-primary">By</span>
+              <span className="text-red">IITians</span>
+            </h2>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary px-4">
+              Olympiad Aptitude Test
+            </h1>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 py-8 w-full max-w-full sm:max-w-3xl lg:max-w-4xl">
           <Button
             variant="ghost"
             onClick={() => navigate("/")}
@@ -140,6 +167,25 @@ export default function OlympiadRegistration() {
                 Complete your payment to finalize your Olympiad registration
               </CardDescription>
             </CardHeader>
+            {/* Prize reminder */}
+            <div className="flex justify-center gap-8 my-4">
+              <div className="text-center">
+                <img
+                  src="https://via.placeholder.com/60x60?text=1st"
+                  alt="1st Prize Laptop"
+                  className="mx-auto h-16 w-16 object-contain animate-pulse"
+                />
+                                <p className="text-xs mt-1 font-semibold">🏆 Premium Laptop</p>
+              </div>
+              <div className="text-center">
+                <img
+                  src="https://via.placeholder.com/60x60?text=2nd"
+                  alt="2nd Prize Tablet"
+                  className="mx-auto h-16 w-16 object-contain animate-pulse"
+                />
+                                <p className="text-xs mt-1 font-semibold">🥈 Advanced Tablet</p>
+              </div>
+            </div>
 
             <CardContent className="space-y-8">
               {/* Serial Number Display */}
@@ -169,7 +215,7 @@ export default function OlympiadRegistration() {
                   </div>
                 </div>
 
-                <div className="bg-blue-50 dark:bg-blue-950/30 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-6 space-y-3">
+                <div className="bg-blue-50 dark:bg-blue-950/30 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-4 sm:p-6 space-y-3">
                   <h3 className="font-bold text-lg text-blue-900 dark:text-blue-300">📱 Payment Instructions</h3>
                   <ol className="space-y-2 text-blue-900 dark:text-blue-200 font-medium">
                     <li className="flex items-start space-x-3">
@@ -186,7 +232,11 @@ export default function OlympiadRegistration() {
                     </li>
                     <li className="flex items-start space-x-3">
                       <span className="font-bold">4️⃣</span>
-                      <span>Send the screenshot to the contact below with your details</span>
+                      <span>Send the screenshot along with your serial number and details to the contact below</span>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <span className="font-bold">5️⃣</span>
+                      <span>Once payment is verified you will receive a final confirmation email with your admit card and exam instructions</span>
                     </li>
                   </ol>
                 </div>
@@ -206,7 +256,7 @@ export default function OlympiadRegistration() {
               </div>
 
               {/* Contact Section */}
-              <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20 rounded-2xl p-6 space-y-3">
+              <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20 rounded-2xl p-4 sm:p-6 space-y-3">
                 <h3 className="font-bold text-xl text-primary">📞 Contact for Payment Verification</h3>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-3">
@@ -230,7 +280,7 @@ export default function OlympiadRegistration() {
               {/* Submitted Details */}
               <div className="bg-accent/10 border-2 border-accent/20 rounded-2xl p-6 space-y-3">
                 <h3 className="font-bold text-lg text-foreground">📝 Your Submitted Details</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3 text-sm">
                   <div>
                     <p className="text-foreground/70 text-xs font-semibold">Name</p>
                     <p className="text-foreground font-medium">{formData.name}</p>
@@ -259,7 +309,7 @@ export default function OlympiadRegistration() {
               </div>
 
               {/* Invoice Download Section */}
-              <div className="bg-green-50 dark:bg-green-950/30 border-2 border-green-200 dark:border-green-800 rounded-2xl p-6 space-y-4">
+              <div className="bg-green-50 dark:bg-green-950/30 border-2 border-green-200 dark:border-green-800 rounded-2xl p-4 sm:p-6 space-y-4">
                 <h3 className="font-bold text-lg text-green-900 dark:text-green-300">📄 Download Invoice</h3>
                 <p className="text-green-900 dark:text-green-200 font-medium">
                   Your registration invoice has been generated and attached to your email. Download it below for your records.
@@ -304,7 +354,20 @@ export default function OlympiadRegistration() {
   // Form Page
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/10">
-      <div className="container mx-auto px-4 py-8 max-w-2xl">
+      {/* Full-Width Header */}
+      <div className="w-full bg-gradient-to-b from-primary/10 to-transparent py-12 sm:py-16 md:py-20">
+        <div className="text-center space-y-4">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight px-4">
+            <span className="text-primary">By</span>
+            <span className="text-red">IITians</span>
+          </h2>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary px-4">
+            Olympiad Aptitude Test
+          </h1>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-8 w-full max-w-full sm:max-w-3xl lg:max-w-4xl">
         <Button
           variant="ghost"
           onClick={() => navigate("/")}
@@ -316,7 +379,6 @@ export default function OlympiadRegistration() {
 
         <Card className="border-4 border-primary/20 rounded-3xl overflow-hidden bg-gradient-to-br from-card to-primary/5 shadow-lg">
           <CardHeader className="text-center pb-6">
-            <CardTitle className="text-3xl font-bold text-primary mb-2">Olympiad Aptitude Test</CardTitle>
             <CardDescription className="text-base">
               Register for the Olympiad Aptitude Test - Fee ₹225
             </CardDescription>

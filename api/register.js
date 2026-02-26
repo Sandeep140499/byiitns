@@ -49,8 +49,8 @@ export default async function handler(req, res) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "sumanme10@gmail.com",
-        pass: "sykn fpnn soyc jrcq",
+        user: process.env.GMAIL_USER || "sumanme10@gmail.com",
+        pass: process.env.GMAIL_PASSWORD || "sykn fpnn soyc jrcq",
       },
     });
 
@@ -69,7 +69,7 @@ export default async function handler(req, res) {
 
     // Email to student
     const studentMailOptions = {
-      from: "sumanme10@gmail.com",
+      from: process.env.GMAIL_USER || "sumanme10@gmail.com",
       to: formData.email,
       subject: `ByIITians - Olympiad Registration Confirmation (${serialNumber})`,
       html: `
@@ -124,8 +124,8 @@ export default async function handler(req, res) {
 
     // Email to owner
     const ownerMailOptions = {
-      from: "sumanme10@gmail.com",
-      to: "sumanme10@gmail.com",
+      from: process.env.GMAIL_USER || "sumanme10@gmail.com",
+      to: process.env.ADMIN_EMAIL || "sumanme10@gmail.com",
       subject: `New Registration: ${formData.name} (${serialNumber})`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -175,19 +175,40 @@ export default async function handler(req, res) {
     };
 
     // Send both emails
-    await transporter.sendMail(studentMailOptions);
-    await transporter.sendMail(ownerMailOptions);
+    try {
+      console.log("[API] Sending student email...");
+      await transporter.sendMail(studentMailOptions);
+      console.log("[API] Student email sent successfully");
+    } catch (emailError) {
+      console.error("[API] Student email send error:", emailError);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to send student email: " + emailError.message,
+        error: emailError.message,
+      });
+    }
 
+    try {
+      console.log("[API] Sending admin email...");
+      await transporter.sendMail(ownerMailOptions);
+      console.log("[API] Admin email sent successfully");
+    } catch (emailError) {
+      console.error("[API] Admin email send error:", emailError);
+      // Don't fail the whole request if admin email fails
+      console.warn("[API] Warning: Admin email failed but continuing...");
+    }
+
+    console.log("[API] Registration completed successfully");
     return res.status(200).json({
       success: true,
       message: "Registration successful! Confirmation emails sent.",
       serialNumber: serialNumber,
     });
   } catch (error) {
-    console.error("API Error:", error);
+    console.error("[API] Unhandled error:", error);
     return res.status(500).json({
       success: false,
-      message: "Server error",
+      message: "Server error: " + error.message,
       error: error.message,
     });
   }
