@@ -187,7 +187,7 @@ const Index = () => {
         <div className="text-center space-y-4">
           {/* Simple ByIITians Logo */}
           <div className="animate-pulse">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
               <span className="text-primary">By</span>
               <span className="text-red">IITians</span>
             </h2>
@@ -314,7 +314,7 @@ const Index = () => {
       <div className="w-full bg-gradient-to-b from-primary/10 to-transparent py-8 sm:py-12 md:py-16 lg:py-20">
         <div className="text-center space-y-4 sm:space-y-6 px-4">
           <div className="mb-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold tracking-tight">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-extrabold tracking-tight">
               <span className="text-primary">By</span>
               <span className="text-red">IITians</span>
             </h2>
@@ -430,7 +430,7 @@ const Index = () => {
         {/* Center Locations Section */}
         <div className="mt-12 sm:mt-16 mb-6 sm:mb-8">
           <div className="text-center mb-6 sm:mb-8 px-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-3 sm:mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary mb-3 sm:mb-4">
               Our <span className="text-red">Centers</span>
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-foreground/70 max-w-4xl mx-auto font-medium px-2">
@@ -441,41 +441,41 @@ const Index = () => {
           <div className="flex justify-center">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-6xl w-full">
               {centerLocations.map((center, index) => (
-                <Card key={index} className="group hover:shadow-2xl transition-all duration-300 border-2 border-primary/20 hover:border-primary/40 rounded-2xl overflow-hidden bg-gradient-to-br from-card to-primary/5 h-full min-h-[250px] sm:min-h-[280px] md:min-h-[320px]">
-                  <CardHeader className="text-center pb-3 sm:pb-4 flex flex-col justify-between h-full">
+                <Card key={index} className="group hover:shadow-2xl transition-all duration-300 border-2 border-primary/20 hover:border-primary/40 rounded-2xl overflow-hidden bg-gradient-to-br from-card to-primary/5 h-full min-h-[300px] sm:min-h-[320px] md:min-h-[340px]">
+                  <CardHeader className="text-center pb-4 sm:pb-4 flex flex-col justify-between h-full">
                     <div>
-                      <div className="mx-auto mb-3 sm:mb-4 flex h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary to-red group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <MapPin className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8 text-white" />
+                      <div className="mx-auto mb-4 sm:mb-4 flex h-14 w-14 sm:h-16 sm:w-16 lg:h-18 lg:w-18 items-center justify-center rounded-full bg-gradient-to-br from-primary to-red group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <MapPin className="h-7 w-7 sm:h-8 sm:w-8 lg:h-9 lg:w-9 text-white" />
                       </div>
-                      <CardTitle className="text-sm sm:text-base lg:text-lg font-bold text-primary group-hover:text-red transition-colors px-2">
+                      <CardTitle className="text-base sm:text-base lg:text-lg font-bold text-primary group-hover:text-red transition-colors px-2">
                         {center.name.split(' ')[1]}
                       </CardTitle>
-                      <CardDescription className="text-xs sm:text-sm lg:text-base font-medium text-foreground/70 px-2">
+                      <CardDescription className="text-sm sm:text-sm lg:text-base font-medium text-foreground/70 px-2">
                         {center.address}
                       </CardDescription>
                     </div>
-                    <CardContent className="text-center space-y-2 sm:space-y-3 pb-4 sm:pb-6 p-0">
-                      <div className="flex flex-col gap-2 justify-center px-2">
+                    <CardContent className="text-center space-y-3 sm:space-y-3 pb-6 sm:pb-6 p-0">
+                      <div className="flex flex-col gap-3 justify-center px-2">
                         <a
                           href={center.mapUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors font-medium text-xs sm:text-sm"
+                          className="inline-flex items-center justify-center px-4 sm:px-4 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors font-medium text-sm sm:text-sm"
                         >
-                          <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                          <MapPin className="h-4 w-4 sm:h-4 sm:w-4 mr-2 sm:mr-2" />
                           <span className="whitespace-nowrap">View Map</span>
                         </a>
                         <a
                           href={center.navigationUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-red text-white rounded-xl hover:bg-red/90 transition-colors font-medium text-xs sm:text-sm"
+                          className="inline-flex items-center justify-center px-4 sm:px-4 py-3 bg-red text-white rounded-xl hover:bg-red/90 transition-colors font-medium text-sm sm:text-sm"
                         >
-                          <Navigation className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                          <Navigation className="h-4 w-4 sm:h-4 sm:w-4 mr-2 sm:mr-2" />
                           <span className="whitespace-nowrap">Navigate</span>
                         </a>
                       </div>
-                      <p className="text-xs text-foreground/60 px-2">
+                      <p className="text-sm text-foreground/60 px-2">
                         Click to navigate directly
                       </p>
                     </CardContent>
