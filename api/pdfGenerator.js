@@ -208,7 +208,7 @@ export function generateInvoicePDF(formData, serialNumber) {
       doc
         .fontSize(11)
         .font("Helvetica-Bold")
-        .text("₹225", 480, feeY + 28, { align: "right" });
+        .text("₹300", 480, feeY + 28, { align: "right" });
 
       doc
         .fontSize(10)
@@ -230,7 +230,7 @@ export function generateInvoicePDF(formData, serialNumber) {
       doc
         .fontSize(16)
         .font("Helvetica-Bold")
-        .text("₹225", 480, totalY + 8, { align: "right" });
+        .text("₹300", 480, totalY + 8, { align: "right" });
 
       // Payment Instructions
       const instructionsY = totalY + 60;
@@ -249,7 +249,7 @@ export function generateInvoicePDF(formData, serialNumber) {
         .fontSize(9)
         .font("Helvetica")
         .text(
-          "1. Scan the PayTM QR code to complete the payment of ₹225",
+          "1. Scan the PayTM QR code to complete the payment of ₹300",
           40,
           instructionsY + 35
         )

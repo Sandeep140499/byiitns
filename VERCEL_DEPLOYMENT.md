@@ -184,7 +184,7 @@ byiitns/
 
 ## 🎯 What Happens on Registration
 
-1. **User fills form** → clicks "Register & Pay ₹225"
+1. **User fills form** → clicks "Register & Pay ₹300"
 2. **Frontend sends request** → `/api/register`
 3. **Vercel Function processes**:
    - ✅ Validates form
