@@ -79,7 +79,6 @@ export async function sendPaymentLinkEmail(formData) {
         .logo {
           font-size: 28px;
           font-weight: bold;
-          color: #d32f2f;
           margin-bottom: 10px;
         }
         .title {
@@ -119,7 +118,7 @@ export async function sendPaymentLinkEmail(formData) {
         }
         .payment-button {
           display: inline-block;
-          background-color: #d32f2f;
+          background-color: #E74C3C;
           color: white;
           padding: 15px 30px;
           text-decoration: none;
@@ -131,11 +130,11 @@ export async function sendPaymentLinkEmail(formData) {
           transition: background-color 0.3s ease;
         }
         .payment-button:hover {
-          background-color: #b71c1c;
+          background-color: #FF6F61;
         }
         .instructions {
           background-color: #e7f3ff;
-          border-left: 4px solid #2196f3;
+          border-left: 4px solid #0055CC;
           padding: 15px;
           margin: 20px 0;
         }
@@ -188,7 +187,7 @@ export async function sendPaymentLinkEmail(formData) {
     <body>
       <div class="container">
         <div class="header">
-          <div class="logo">🏆 ByIITians</div>
+          <div class="logo">🏆 <span style="color: #0055CC;">By</span><span style="color: #E74C3C;">IITians</span></div>
           <h1 class="title">Payment Link</h1>
         </div>
 
@@ -355,8 +354,8 @@ export async function sendRegistrationEmails(formData) {
     subject: `ByIITians - Olympiad Registration Confirmation (${serialNumber})`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-        <div style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 <span style="color: #3b82f6;">By</span><span style="color: #ffffff;">IITians</span></h1>
+        <div style="background: linear-gradient(135deg, #E74C3C 0%, #FF6F61 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 <span style="color: #0055CC;">By</span><span style="color: #E74C3C;">IITians</span></h1>
           <p style="margin: 5px 0 0; font-size: 16px; opacity: 0.9;">Always Build Concepts</p>
         </div>
         
@@ -366,14 +365,14 @@ export async function sendRegistrationEmails(formData) {
             <p style="margin: 10px 0 0; font-size: 16px;">Your Olympiad Aptitude Test registration has been confirmed</p>
           </div>
           
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #d32f2f;">
-            <h3 style="color: #d32f2f; margin: 0 0 15px; font-size: 20px;">📋 Your Registration Details</h3>
-            <p style="margin: 5px 0; color: #333;"><strong>Serial Number:</strong> <span style="background: #d32f2f; color: white; padding: 5px 10px; border-radius: 5px; font-family: monospace;">${serialNumber}</span></p>
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #E74C3C;">
+            <h3 style="color: #E74C3C; margin: 0 0 15px; font-size: 20px;">📋 Your Registration Details</h3>
+            <p style="margin: 5px 0; color: #333;"><strong>Serial Number:</strong> <span style="background: #E74C3C; color: white; padding: 5px 10px; border-radius: 5px; font-family: monospace;">${serialNumber}</span></p>
             <p style="margin: 5px 0; color: #333;"><strong>Name:</strong> ${formData.name}</p>
             <p style="margin: 5px 0; color: #333;"><strong>Class:</strong> ${formData.class}</p>
             <p style="margin: 5px 0; color: #333;"><strong>School:</strong> ${formData.schoolName}</p>
             <p style="margin: 5px 0; color: #333;"><strong>Center:</strong> ${selectedCenter ? selectedCenter.name : 'Not specified'}</p>
-            <p style="margin: 5px 0; color: #333;"><strong>Registration Fee:</strong> <span style="color: #d32f2f; font-weight: bold; font-size: 18px;">₹300</span></p>
+            <p style="margin: 5px 0; color: #333;"><strong>Registration Fee:</strong> <span style="color: #E74C3C; font-weight: bold; font-size: 18px;">₹300</span></p>
           </div>
 
           ${selectedCenter ? `
@@ -438,13 +437,13 @@ export async function sendRegistrationEmails(formData) {
             </a>
           </div>
           
-          <div style="background: #fff3cd; padding: 15px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ffc107;">
-            <p style="margin: 0; color: #856404;"><strong>⏰ Important:</strong> Registration closes on 26th March. Complete your payment before the deadline!</p>
+          <div style="background: #fff7e0; padding: 15px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #FFC107;">
+            <p style="margin: 0; color: #8a6d1d;"><strong>⏰ Important:</strong> Registration closes on 26th March. Complete your payment before the deadline!</p>
           </div>
           
           <div style="text-align: center; padding-top: 20px; border-top: 1px solid #eee;">
             <p style="margin: 0; color: #666; font-size: 14px;">For any queries, contact us at:</p>
-            <p style="margin: 5px 0; color: #d32f2f; font-weight: bold;">📞 +91 8447412646</p>
+            <p style="margin: 5px 0; color: #E74C3C; font-weight: bold;">📞 +91 8447412646</p>
             <p style="margin: 5px 0; color: #666; font-size: 12px;">Generated on ${new Date().toLocaleString("en-IN")}</p>
           </div>
         </div>
@@ -460,20 +459,20 @@ export async function sendRegistrationEmails(formData) {
     subject: `New Olympiad Registration - ${formData.name} (${serialNumber})`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 <span style="color: #3b82f6;">By</span><span style="color: #ffffff;">IITians</span></h1>
+        <div style="background: linear-gradient(135deg, #E74C3C 0%, #FF6F61 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 <span style="color: #0055CC;">By</span><span style="color: #E74C3C;">IITians</span></h1>
           <p style="margin: 5px 0 0; font-size: 16px; opacity: 0.9;">New Registration Received</p>
         </div>
         
         <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #d32f2f;">
-            <h3 style="color: #d32f2f; margin: 0 0 15px; font-size: 20px;">📋 Registration Details</h3>
-            <p style="margin: 5px 0; color: #333;"><strong>Serial Number:</strong> <span style="background: #d32f2f; color: white; padding: 5px 10px; border-radius: 5px; font-family: monospace;">${serialNumber}</span></p>
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #E74C3C;">
+            <h3 style="color: #E74C3C; margin: 0 0 15px; font-size: 20px;">📋 Registration Details</h3>
+            <p style="margin: 5px 0; color: #333;"><strong>Serial Number:</strong> <span style="background: #E74C3C; color: white; padding: 5px 10px; border-radius: 5px; font-family: monospace;">${serialNumber}</span></p>
             <p style="margin: 5px 0; color: #333;"><strong>Name:</strong> ${formData.name}</p>
             <p style="margin: 5px 0; color: #333;"><strong>Class:</strong> ${formData.class}</p>
             <p style="margin: 5px 0; color: #333;"><strong>School:</strong> ${formData.schoolName}</p>
             <p style="margin: 5px 0; color: #333;"><strong>Center:</strong> ${selectedCenter ? selectedCenter.name : 'Not specified'}</p>
-            <p style="margin: 5px 0; color: #333;"><strong>Registration Fee:</strong> <span style="color: #d32f2f; font-weight: bold; font-size: 18px;">₹300</span></p>
+            <p style="margin: 5px 0; color: #333;"><strong>Registration Fee:</strong> <span style="color: #E74C3C; font-weight: bold; font-size: 18px;">₹300</span></p>
             <p style="margin: 5px 0; color: #333;"><strong>Status:</strong> Pending Payment Verification</p>
             <p style="margin: 5px 0; color: #333;"><strong>Registration Date:</strong> ${new Date().toLocaleDateString()}</p>
             ${selectedCenter ? `
@@ -484,7 +483,7 @@ export async function sendRegistrationEmails(formData) {
           
           <div style="text-align: center; padding-top: 20px; border-top: 1px solid #eee;">
             <p style="margin: 0; color: #666; font-size: 14px;">The detailed invoice has been attached for your records.</p>
-            <p style="margin: 10px 0 0; color: #d32f2f; font-weight: bold;">📞 +91 8447412646</p>
+            <p style="margin: 10px 0 0; color: #E74C3C; font-weight: bold;">📞 +91 8447412646</p>
             <p style="margin: 5px 0; color: #666; font-size: 12px;">Generated on ${new Date().toLocaleString("en-IN")}</p>
           </div>
         </div>

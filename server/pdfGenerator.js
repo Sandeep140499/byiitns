@@ -46,8 +46,9 @@ export function generateInvoicePDF(formData, serialNumber) {
         reject(err);
       });
 
-      // Define brand colors
-      const primaryColor = "#d32f2f"; // ByIITians red
+      // Define brand colors (aligned with homepage)
+      const brandBlue = "#0055CC"; // hsl(214 100% 34%) - By
+      const primaryColor = "#E74C3C"; // hsl(355 78% 58%) - IITians red accent
       const secondaryColor = "#1a1a1a"; // Dark black
       const accentColor = "#f5f5f5"; // Light gray
       const lightBlue = "#e3f2fd"; // Light blue for center section
@@ -68,18 +69,18 @@ export function generateInvoicePDF(formData, serialNumber) {
           .fill();
       }
       
-      // "By" in primary color (blue), "IITians" in white
+      // "By" in brand blue, "IITians" in brand red
       const byWidth = doc.widthOfString("By", { font: "Helvetica-Bold", fontSize: 42 });
       const iitiansWidth = doc.widthOfString("IITians", { font: "Helvetica-Bold", fontSize: 42 });
       const totalWidth = byWidth + iitiansWidth;
       const startX = (612 - totalWidth) / 2;
       
-      doc.fillColor("#3b82f6") // Primary blue color
+      doc.fillColor(brandBlue)
         .fontSize(42)
         .font("Helvetica-Bold")
         .text("By", startX, 60);
       
-      doc.fillColor("#ffffff")
+      doc.fillColor(primaryColor)
         .fontSize(42)
         .font("Helvetica-Bold")
         .text("IITians", startX + byWidth, 60)
@@ -313,6 +314,8 @@ export function generateInvoicePDF(formData, serialNumber) {
         .text(formData.percentage || "N/A", 370, academicY + 100);
 
       // Enhanced Center Information Section
+      let feeY;
+
       if (selectedCenter) {
         const centerY = academicY + 130;
 
@@ -329,17 +332,17 @@ export function generateInvoicePDF(formData, serialNumber) {
           .fontSize(16)
           .font("Helvetica-Bold")
           .text("📍 YOUR CENTER LOCATION", 60, centerY + 15);
-
+        
         doc.fillColor(secondaryColor)
           .fontSize(14)
           .font("Helvetica-Bold")
           .text(selectedCenter.name, 60, centerY + 35);
-
+        
         doc.fillColor("#333333")
           .fontSize(12)
           .font("Helvetica")
           .text(selectedCenter.address, 60, centerY + 55);
-
+        
         // Add URLs with proper formatting
         doc.fillColor("#1976D2")
           .fontSize(10)
@@ -350,7 +353,7 @@ export function generateInvoicePDF(formData, serialNumber) {
           .fontSize(9)
           .font("Helvetica")
           .text(selectedCenter.mapUrl, 120, centerY + 75);
-
+        
         doc.fillColor("#1976D2")
           .fontSize(10)
           .font("Helvetica-Bold")
@@ -361,13 +364,12 @@ export function generateInvoicePDF(formData, serialNumber) {
           .font("Helvetica")
           .text(selectedCenter.navigationUrl, 150, centerY + 90);
 
-        const feeY = centerY + 130;
+        feeY = centerY + 130;
       } else {
-        const feeY = academicY + 130;
+        feeY = academicY + 130;
       }
 
       // Enhanced Fee Summary Section
-      const feeY = academicY + 130;
 
       doc.fillColor(goldColor)
         .roundedRect(50, feeY, 512, 80, 8)
@@ -484,18 +486,18 @@ export function generateInvoicePDF(formData, serialNumber) {
         .font("Helvetica-Bold")
         .text("🎓 ", 306, instructionsY + 240, { align: "center" });
       
-      // "By" in primary color (blue), "IITians" in red
+      // "By" in brand blue, "IITians" in brand red
       const footerByWidth = doc.widthOfString("By", { font: "Helvetica-Bold", fontSize: 12 });
       const footerIitiansWidth = doc.widthOfString("IITians - Always Build Concepts", { font: "Helvetica-Bold", fontSize: 12 });
       const footerTotalWidth = footerByWidth + footerIitiansWidth;
       const footerStartX = (612 - footerTotalWidth) / 2;
       
-      doc.fillColor("#3b82f6") // Primary blue color
+      doc.fillColor(brandBlue)
         .fontSize(12)
         .font("Helvetica-Bold")
         .text("By", footerStartX, instructionsY + 240);
       
-      doc.fillColor("#d32f2f") // Red color
+      doc.fillColor(primaryColor)
         .fontSize(12)
         .font("Helvetica-Bold")
         .text("IITians - Always Build Concepts", footerStartX + footerByWidth, instructionsY + 240);
