@@ -44,8 +44,8 @@ const centerLocations = {
 export async function sendPaymentLinkEmail(formData) {
   const { name, email, amount, paymentMethod } = formData;
 
-  // Generate payment link (in production, use actual payment gateway)
-  const paymentLink = `https://your-payment-gateway.com/pay?amount=${amount}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&method=${paymentMethod}`;
+  // Link to live payment page
+  const paymentLink = "https://byiitns.vercel.app/payment";
 
   const emailTemplate = `
     <!DOCTYPE html>
@@ -354,7 +354,7 @@ export async function sendRegistrationEmails(formData) {
     subject: `ByIITians - Olympiad Registration Confirmation (${serialNumber})`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-        <div style="background: linear-gradient(135deg, #E74C3C 0%, #FF6F61 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+        <div style="background: #ffffff; color: #111827; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; border-bottom: 2px solid #e5e7eb;">
           <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 <span style="color: #0055CC;">By</span><span style="color: #E74C3C;">IITians</span></h1>
           <p style="margin: 5px 0 0; font-size: 16px; opacity: 0.9;">Always Build Concepts</p>
         </div>
@@ -432,7 +432,7 @@ export async function sendRegistrationEmails(formData) {
           </div>
           
           <div style="text-align: center; margin: 30px 0;">
-            <a href="https://your-domain.com/payment" style="display: inline-block; background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
+            <a href="https://byiitns.vercel.app/payment" style="display: inline-block; background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
               💳 Pay Online Instantly
             </a>
           </div>
@@ -459,7 +459,7 @@ export async function sendRegistrationEmails(formData) {
     subject: `New Olympiad Registration - ${formData.name} (${serialNumber})`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="background: linear-gradient(135deg, #E74C3C 0%, #FF6F61 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+        <div style="background: #ffffff; color: #111827; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; border-bottom: 2px solid #e5e7eb;">
           <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 <span style="color: #0055CC;">By</span><span style="color: #E74C3C;">IITians</span></h1>
           <p style="margin: 5px 0 0; font-size: 16px; opacity: 0.9;">New Registration Received</p>
         </div>

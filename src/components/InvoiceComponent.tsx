@@ -33,7 +33,10 @@ export const InvoiceTemplate = React.forwardRef<
     >
       {/* Header */}
       <div className="text-center mb-4 sm:mb-6 border-b-2 border-gray-300 pb-3 sm:pb-4">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-600">ByIITians</h1>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+          <span className="text-primary">By</span>
+          <span className="text-red">IITians</span>
+        </h1>
         <p className="text-xs sm:text-sm text-gray-600 mt-1">Always Build Concepts</p>
         <p className="text-xs text-gray-500">Delhi | NEET | IIT | CBSE | NTSE | Foundation</p>
       </div>
@@ -167,7 +170,7 @@ interface InvoiceDownloadProps {
 }
 
 export const InvoiceDownloadButton = ({ formData, serialNumber }: InvoiceDownloadProps) => {
-  const handleDownloadPDF = async () => {
+      const handleDownloadPDF = async () => {
     try {
       // Create a temporary container for the invoice
       const element = document.createElement("div");
@@ -176,7 +179,9 @@ export const InvoiceDownloadButton = ({ formData, serialNumber }: InvoiceDownloa
       root.innerHTML = `
         <div class="bg-white text-black p-8" style="font-family: Arial, sans-serif;">
           <div style="text-align: center; margin-bottom: 20px; border-bottom: 2px solid #ccc; padding-bottom: 15px;">
-            <h1 style="font-size: 32px; font-weight: bold; color: #d32f2f; margin: 0;">ByIITians</h1>
+            <h1 style="font-size: 32px; font-weight: bold; margin: 0;">
+              <span style="color: #0055CC;">By</span><span style="color: #E74C3C;">IITians</span>
+            </h1>
             <p style="font-size: 12px; color: #666; margin: 5px 0 0;">Always Build Concepts</p>
             <p style="font-size: 11px; color: #999;">Delhi | NEET | IIT | CBSE | NTSE | Foundation</p>
           </div>
@@ -277,9 +282,9 @@ export const InvoiceDownloadButton = ({ formData, serialNumber }: InvoiceDownloa
             </ol>
           </div>
 
-          <div style="background: #f0f8ff; padding: 15px; border-left: 4px solid #4CAF50; margin-bottom: 30px;">
+        <div style="background: #f0f8ff; padding: 15px; border-left: 4px solid #4CAF50; margin-bottom: 30px;">
             <h3 style="font-weight: bold; margin: 0 0 8px;">💳 PAY ONLINE (INSTANT VERIFICATION)</h3>
-            <p style="font-size: 12px; margin: 0 0 5px;">Visit: <a href="https://byiitians.com/payment" style="color: #1976D2; text-decoration: underline;">https://byiitians.com/payment</a></p>
+          <p style="font-size: 12px; margin: 0 0 5px;">Visit: <a href="https://byiitns.vercel.app/payment" style="color: #1976D2; text-decoration: underline;">https://byiitns.vercel.app/payment</a></p>
             <p style="font-size: 11px; color: #666; margin: 0;">Click the link above for instant payment verification</p>
           </div>
 

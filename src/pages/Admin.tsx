@@ -403,11 +403,11 @@ const Admin = () => {
                       contents.map((content) => (
                         <div
                           key={content.id}
-                          className="flex items-start justify-between p-4 border-2 border-primary/20 rounded-2xl hover:bg-primary/5 transition-colors"
+                          className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 p-4 border-2 border-primary/20 rounded-2xl hover:bg-primary/5 transition-colors"
                         >
                           <div className="flex-1">
-                            <h4 className="font-semibold text-primary">{content.title}</h4>
-                            <p className="text-sm text-foreground/70 mt-1">{content.description}</p>
+                            <h4 className="font-semibold text-primary break-words">{content.title}</h4>
+                            <p className="text-sm text-foreground/70 mt-1 break-words">{content.description}</p>
                             <span className="text-xs bg-accent/20 text-accent-foreground px-3 py-1 rounded-full mt-2 inline-block font-medium">
                               {content.content_type}
                             </span>
@@ -416,7 +416,7 @@ const Admin = () => {
                             variant="destructive"
                             size="icon"
                             onClick={() => handleDeleteContent(content.id)}
-                            className="rounded-full"
+                            className="rounded-full self-end sm:self-auto"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>

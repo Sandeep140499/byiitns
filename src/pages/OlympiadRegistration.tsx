@@ -126,7 +126,7 @@ export default function OlympiadRegistration() {
       if (data.success) {
         setSerialNumber(data.serialNumber);
         setIsSubmitted(true);
-        toast.success("Registration successful! Confirmation emails sent.");
+        toast.success("Registration successful! Confirmation email sent.");
       } else {
         toast.error(data.message || "Registration failed. Please try again.");
       }
@@ -174,9 +174,9 @@ export default function OlympiadRegistration() {
               </CardDescription>
             </CardHeader>
             {/* Prize reminder */}
-            <div className="flex justify-center gap-4 sm:gap-6 lg:gap-8 my-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 lg:gap-8 my-4">
               <div className="text-center">
-                <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 p-3 sm:p-4 rounded-xl border-2 border-yellow-300 shadow-lg">
+                <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 p-3 sm:p-4 rounded-xl border-2 border-yellow-300 shadow-lg w-full sm:w-auto">
                   <div className="relative">
                     <img
                       src={firstPrize}
@@ -191,7 +191,7 @@ export default function OlympiadRegistration() {
                 </div>
               </div>
               <div className="text-center">
-                <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-3 sm:p-4 rounded-xl border-2 border-gray-300 shadow-lg">
+                <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-3 sm:p-4 rounded-xl border-2 border-gray-300 shadow-lg w-full sm:w-auto">
                   <div className="relative">
                     <img
                       src={secondPrize}
@@ -206,7 +206,7 @@ export default function OlympiadRegistration() {
                 </div>
               </div>
               <div className="text-center">
-                <div className="bg-gradient-to-br from-orange-100 to-orange-200 p-3 sm:p-4 rounded-xl border-2 border-orange-300 shadow-lg">
+                <div className="bg-gradient-to-br from-orange-100 to-orange-200 p-3 sm:p-4 rounded-xl border-2 border-orange-300 shadow-lg w-full sm:w-auto">
                   <div className="relative">
                     <img
                       src={thirdPrize}
@@ -361,21 +361,8 @@ export default function OlympiadRegistration() {
                 </Button>
                 <Button
                   onClick={() => {
+                    // Return to form with existing data preserved
                     setIsSubmitted(false);
-                    setFormData({
-                      name: "",
-                      fatherName: "",
-                      phoneNumber: "",
-                      email: "",
-                      class: "",
-                      section: "",
-                      rollNumber: "",
-                      schoolName: "",
-                      city: "",
-                      gender: "",
-                      percentage: "",
-                      center: "",
-                    });
                   }}
                   variant="outline"
                   className="flex-1 border-2 rounded-xl h-11"
@@ -409,7 +396,7 @@ export default function OlympiadRegistration() {
         </div>
       </div>
 
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-8">
+      <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-8">
         <Button
           variant="ghost"
           onClick={() => navigate("/")}

@@ -24,17 +24,24 @@ export function generateInvoicePDF(formData, serialNumber) {
         reject(err);
       });
 
-      // Header with branding – colorful banner
+      // Brand colors aligned with homepage
+      const brandBlue = "#0055CC"; // By
+      const primaryColor = "#E74C3C"; // IITians red
+
+      // Header with branding – By (blue) + IITians (red) on white background
       doc
         .rect(40, 40, 515, 60)
-        .fill("#d32f2f")
-        .fillColor("white")
+        .fill("#ffffff")
+        .fillColor(brandBlue)
         .fontSize(32)
         .font("Helvetica-Bold")
-        .text("ByIITians", 45, 50, { align: "left" })
+        .text("By", 45, 50, { continued: true })
+        .fillColor(primaryColor)
+        .text("IITians")
+        .fillColor("#333333")
         .fontSize(12)
         .font("Helvetica")
-        .text("Always Build Concepts", 45, 70, { align: "left" });
+        .text("Always Build Concepts", 45, 72, { align: "left" });
 
       doc.moveTo(40, 110).lineTo(555, 110).strokeColor("#d32f2f").lineWidth(2).stroke();
 
