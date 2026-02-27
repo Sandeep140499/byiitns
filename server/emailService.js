@@ -356,7 +356,7 @@ export async function sendRegistrationEmails(formData) {
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
         <div style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 ByIITians</h1>
+          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 <span style="color: #3b82f6;">By</span><span style="color: #ffffff;">IITians</span></h1>
           <p style="margin: 5px 0 0; font-size: 16px; opacity: 0.9;">Always Build Concepts</p>
         </div>
         
@@ -461,7 +461,7 @@ export async function sendRegistrationEmails(formData) {
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 ByIITians</h1>
+          <h1 style="margin: 0; font-size: 32px; font-weight: bold;">🎓 <span style="color: #3b82f6;">By</span><span style="color: #ffffff;">IITians</span></h1>
           <p style="margin: 5px 0 0; font-size: 16px; opacity: 0.9;">New Registration Received</p>
         </div>
         

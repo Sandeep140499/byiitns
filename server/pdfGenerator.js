@@ -65,10 +65,21 @@ export function generateInvoicePDF(formData, serialNumber) {
           .fill();
       }
       
+      // "By" in primary color (blue), "IITians" in white
+      const byWidth = doc.widthOfString("By", { font: "Helvetica-Bold", fontSize: 42 });
+      const iitiansWidth = doc.widthOfString("IITians", { font: "Helvetica-Bold", fontSize: 42 });
+      const totalWidth = byWidth + iitiansWidth;
+      const startX = (612 - totalWidth) / 2;
+      
+      doc.fillColor("#3b82f6") // Primary blue color
+        .fontSize(42)
+        .font("Helvetica-Bold")
+        .text("By", startX, 60);
+      
       doc.fillColor("#ffffff")
         .fontSize(42)
         .font("Helvetica-Bold")
-        .text("ByIITians", { align: "center" })
+        .text("IITians", startX + byWidth, 60)
         .fontSize(16)
         .font("Helvetica")
         .text("Always Build Concepts", { align: "center" })
@@ -303,12 +314,12 @@ export function generateInvoicePDF(formData, serialNumber) {
         const centerY = academicY + 130;
 
         doc.fillColor(lightBlue)
-          .roundedRect(50, centerY, 512, 90, 8)
+          .roundedRect(50, centerY, 512, 110, 8)
           .fill();
         
         doc.strokeColor(primaryColor)
           .lineWidth(2)
-          .roundedRect(50, centerY, 512, 90, 8)
+          .roundedRect(50, centerY, 512, 110, 8)
           .stroke();
 
         doc.fillColor(primaryColor)
@@ -326,12 +337,28 @@ export function generateInvoicePDF(formData, serialNumber) {
           .font("Helvetica")
           .text(selectedCenter.address, 60, centerY + 55);
 
+        // Add URLs with proper formatting
         doc.fillColor("#1976D2")
           .fontSize(10)
+          .font("Helvetica-Bold")
+          .text("🗺️ Map URL:", 60, centerY + 75);
+        
+        doc.fillColor("#1976D2")
+          .fontSize(9)
           .font("Helvetica")
-          .text("Map: " + selectedCenter.mapUrl, 60, centerY + 75);
+          .text(selectedCenter.mapUrl, 120, centerY + 75);
 
-        const feeY = centerY + 110;
+        doc.fillColor("#1976D2")
+          .fontSize(10)
+          .font("Helvetica-Bold")
+          .text("🧭 Navigation URL:", 60, centerY + 90);
+        
+        doc.fillColor("#1976D2")
+          .fontSize(9)
+          .font("Helvetica")
+          .text(selectedCenter.navigationUrl, 150, centerY + 90);
+
+        const feeY = centerY + 130;
       } else {
         const feeY = academicY + 130;
       }
@@ -452,7 +479,23 @@ export function generateInvoicePDF(formData, serialNumber) {
       doc.fillColor(primaryColor)
         .fontSize(12)
         .font("Helvetica-Bold")
-        .text("🎓 ByIITians - Always Build Concepts", 306, instructionsY + 240, { align: "center" });
+        .text("🎓 ", 306, instructionsY + 240, { align: "center" });
+      
+      // "By" in primary color (blue), "IITians" in red
+      const footerByWidth = doc.widthOfString("By", { font: "Helvetica-Bold", fontSize: 12 });
+      const footerIitiansWidth = doc.widthOfString("IITians - Always Build Concepts", { font: "Helvetica-Bold", fontSize: 12 });
+      const footerTotalWidth = footerByWidth + footerIitiansWidth;
+      const footerStartX = (612 - footerTotalWidth) / 2;
+      
+      doc.fillColor("#3b82f6") // Primary blue color
+        .fontSize(12)
+        .font("Helvetica-Bold")
+        .text("By", footerStartX, instructionsY + 240);
+      
+      doc.fillColor("#d32f2f") // Red color
+        .fontSize(12)
+        .font("Helvetica-Bold")
+        .text("IITians - Always Build Concepts", footerStartX + footerByWidth, instructionsY + 240);
 
       doc.fillColor("#666666")
         .fontSize(10)
