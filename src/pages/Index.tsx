@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { SectionCard } from "@/components/SectionCard";
@@ -36,6 +36,11 @@ const Index = () => {
   const [websiteUrl, setWebsiteUrl] = useState("");
   const [showOlympiadPopup, setShowOlympiadPopup] = useState(false);
 
+  // Cache for sections to avoid repeated requests
+  const sectionsCache = useRef<Section[] | null>(null);
+  const cacheTimestamp = useRef<number>(0);
+  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache
+
   // Center locations with Google Maps URLs
   const centerLocations = [
     {
@@ -66,52 +71,133 @@ const Index = () => {
   };
 
   useEffect(() => {
-    fetchSections();
-    checkAdminStatus();
-    // Removed automatic popup - will trigger only on button/card click
+    let isMounted = true;
+    let loadingTimeout: NodeJS.Timeout;
+
+    const loadData = async () => {
+      try {
+        // Run both requests in parallel with timeout
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Request timeout')), 3000)
+        );
+
+        const dataPromise = Promise.all([
+          fetchSectionsFast(),
+          checkAdminStatusFast()
+        ]);
+
+        await Promise.race([dataPromise, timeoutPromise]);
+        
+        if (isMounted) {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error loading initial data:", error);
+        if (isMounted) {
+          // Set defaults and continue immediately
+          setSections([]);
+          setIsAdmin(false);
+          setLoading(false);
+        }
+      }
+    };
+
+    // Start loading immediately
+    loadData();
+    
+    // Fallback timeout - always stop loading after 2 seconds max
+    loadingTimeout = setTimeout(() => {
+      if (isMounted) {
+        setLoading(false);
+      }
+    }, 2000);
+
     // Get the current website URL
     if (typeof window !== "undefined") {
       setWebsiteUrl(window.location.origin);
     }
+
+    return () => {
+      isMounted = false;
+      if (loadingTimeout) clearTimeout(loadingTimeout);
+    };
   }, []);
 
-  const fetchSections = async () => {
+  const fetchSectionsFast = async () => {
     try {
+      // Check cache first
+      const now = Date.now();
+      if (sectionsCache.current && (now - cacheTimestamp.current) < CACHE_DURATION) {
+        setSections(sectionsCache.current);
+        return;
+      }
+
       const { data, error } = await supabase
         .from("sections")
-        .select("*")
+        .select("id, title, description, icon, display_order") // Only select needed fields
         .eq("is_active", true)
-        .order("display_order");
+        .order("display_order")
+        .limit(20); // Limit results for speed
 
       if (error) throw error;
-      setSections(data || []);
+      
+      const sections = data || [];
+      setSections(sections);
+      
+      // Update cache
+      sectionsCache.current = sections;
+      cacheTimestamp.current = now;
     } catch (error) {
+      console.error("Error fetching sections:", error);
       toast.error("Failed to load sections");
-    } finally {
-      setLoading(false);
+      setSections([]);
     }
   };
 
-  const checkAdminStatus = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return;
+  const checkAdminStatusFast = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        setIsAdmin(false);
+        return;
+      }
 
-    const { data } = await supabase
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", session.user.id)
-      .eq("role", "admin")
-      .single();
+      // Use RPC for faster admin check if available, otherwise use regular query
+      const { data, error } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", session.user.id)
+        .eq("role", "admin")
+        .single();
 
-    setIsAdmin(!!data);
+      if (error && error.code !== 'PGRST116') {
+        console.error("Error checking admin status:", error);
+      }
+      
+      setIsAdmin(!!data);
+    } catch (error) {
+      console.error("Error in admin status check:", error);
+      setIsAdmin(false);
+    }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-accent/10">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading dashboard...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-accent/10">
+        <div className="text-center space-y-4">
+          {/* Simple ByIITians Logo */}
+          <div className="animate-pulse">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+              <span className="text-primary">By</span>
+              <span className="text-red">IITians</span>
+            </h2>
+          </div>
+          
+          {/* Fast Loading Spinner */}
+          <div className="flex items-center space-x-3">
+            <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary/20 border-t-primary"></div>
+            <p className="text-sm font-medium text-foreground">Loading...</p>
+          </div>
         </div>
       </div>
     );
