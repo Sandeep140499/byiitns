@@ -138,15 +138,6 @@ export function generateInvoicePDF(formData, serialNumber) {
       doc.fillColor(secondaryColor)
         .fontSize(12)
         .font("Helvetica-Bold")
-        .text("Status:", 350, 245)
-        .fillColor(goldColor)
-        .fontSize(14)
-        .font("Helvetica-Bold")
-        .text("PENDING PAYMENT", 430, 245);
-
-      doc.fillColor(secondaryColor)
-        .fontSize(12)
-        .font("Helvetica-Bold")
         .text("Amount:", 350, 265)
         .fillColor(primaryColor)
         .fontSize(16)
@@ -331,7 +322,7 @@ export function generateInvoicePDF(formData, serialNumber) {
         doc.fillColor(primaryColor)
           .fontSize(16)
           .font("Helvetica-Bold")
-          .text("📍 YOUR CENTER LOCATION", 60, centerY + 15);
+          .text("CENTER LOCATION", 60, centerY + 15);
         
         doc.fillColor(secondaryColor)
           .fontSize(14)
@@ -383,7 +374,7 @@ export function generateInvoicePDF(formData, serialNumber) {
       doc.fillColor(secondaryColor)
         .fontSize(16)
         .font("Helvetica-Bold")
-        .text("💰 PAYMENT DETAILS", 60, feeY + 15);
+        .text("PAYMENT SUMMARY", 60, feeY + 15);
 
       doc.fillColor("#333333")
         .fontSize(14)
@@ -422,99 +413,31 @@ export function generateInvoicePDF(formData, serialNumber) {
         .font("Helvetica-Bold")
         .text("₹300", 460, totalY + 18, { align: "right" });
 
-      // Enhanced Payment Instructions Section
-      const instructionsY = totalY + 80;
+      // Footer (kept compact so PDF stays single-page)
+      const footerY = totalY + 80;
 
-      doc.fillColor(primaryColor)
-        .fontSize(16)
-        .font("Helvetica-Bold")
-        .text("💳 PAYMENT INSTRUCTIONS", 50, instructionsY);
-
-      doc.strokeColor(primaryColor)
-        .lineWidth(2)
-        .moveTo(50, instructionsY + 5)
-        .lineTo(300, instructionsY + 5)
-        .stroke();
-
-      // Enhanced payment instruction box
-      doc.fillColor(accentColor)
-        .roundedRect(50, instructionsY + 20, 512, 120, 8)
-        .fill();
-      
-      doc.strokeColor(primaryColor)
-        .lineWidth(2)
-        .roundedRect(50, instructionsY + 20, 512, 120, 8)
-        .stroke();
-
-      doc.fillColor("#333333")
-        .fontSize(12)
-        .font("Helvetica")
-        .text("1. Scan PayTM QR code to complete payment of ₹300", 60, instructionsY + 40)
-        .text("2. Save your PayTM payment screenshot", 60, instructionsY + 60)
-        .text("3. Send screenshot along with this invoice number to:", 60, instructionsY + 80)
-        .text("   Suman Kumar (WhatsApp: +91 8447412646)", 60, instructionsY + 100)
-        .text("4. Your application will be verified upon receipt of payment", 60, instructionsY + 120);
-
-      // Enhanced online payment section
-      doc.fillColor(lightBlue)
-        .roundedRect(50, instructionsY + 150, 512, 50, 8)
-        .fill();
-      
-      doc.strokeColor(primaryColor)
-        .lineWidth(2)
-        .roundedRect(50, instructionsY + 150, 512, 50, 8)
-        .stroke();
-      
-      doc.fillColor(primaryColor)
-        .fontSize(14)
-        .font("Helvetica-Bold")
-        .text("🌐 PAY ONLINE (INSTANT VERIFICATION)", 60, instructionsY + 165);
-      
-      doc.fillColor("#333333")
-        .fontSize(12)
-        .font("Helvetica")
-        .text("Visit: https://byiitians.com/payment", 60, instructionsY + 185);
-      
-      doc.fillColor("#666666")
-        .fontSize(10)
-        .font("Helvetica")
-        .text("Click the link above for instant payment verification", 60, instructionsY + 205);
-
-      // Enhanced Footer with professional branding
-      doc.fillColor(primaryColor)
-        .fontSize(12)
-        .font("Helvetica-Bold")
-        .text("🎓 ", 306, instructionsY + 240, { align: "center" });
-      
-      // "By" in brand blue, "IITians" in brand red
+      // Brand line
       const footerByWidth = doc.widthOfString("By", { font: "Helvetica-Bold", fontSize: 12 });
       const footerIitiansWidth = doc.widthOfString("IITians - Always Build Concepts", { font: "Helvetica-Bold", fontSize: 12 });
       const footerTotalWidth = footerByWidth + footerIitiansWidth;
       const footerStartX = (612 - footerTotalWidth) / 2;
-      
+
       doc.fillColor(brandBlue)
         .fontSize(12)
         .font("Helvetica-Bold")
-        .text("By", footerStartX, instructionsY + 240);
+        .text("By", footerStartX, footerY);
       
       doc.fillColor(primaryColor)
         .fontSize(12)
         .font("Helvetica-Bold")
-        .text("IITians - Always Build Concepts", footerStartX + footerByWidth, instructionsY + 240);
+        .text("IITians - Always Build Concepts", footerStartX + footerByWidth, footerY);
 
       doc.fillColor("#666666")
         .fontSize(10)
         .font("Helvetica")
-        .text("This is an official registration invoice. Please keep it for your records.", 306, instructionsY + 260, { align: "center" })
-        .text(`Generated on ${new Date().toLocaleString("en-IN")}`, 306, instructionsY + 280, { align: "center" })
-        .text("📞 Contact: +91 8447412646 | 🌐 www.byiitians.com", 306, instructionsY + 300, { align: "center" });
-
-      // Add decorative footer line
-      doc.strokeColor(primaryColor)
-        .lineWidth(3)
-        .moveTo(50, instructionsY + 320)
-        .lineTo(562, instructionsY + 320)
-        .stroke();
+        .text("This is an official registration invoice. Please keep it for your records.", 306, footerY + 18, { align: "center" })
+        .text(`Generated on ${new Date().toLocaleString("en-IN")}`, 306, footerY + 32, { align: "center" })
+        .text("Contact: +91 8447412646 | www.byiitians.com", 306, footerY + 46, { align: "center" });
 
       doc.end();
     } catch (error) {
