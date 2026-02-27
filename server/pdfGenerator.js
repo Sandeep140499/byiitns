@@ -6,17 +6,20 @@ const centerLocations = {
   mehrauli: {
     name: "ByIITians MEHRAULI",
     address: "Mehrauli, New Delhi",
-    mapUrl: "https://maps.app.goo.gl/Q9rWEneuXHkg47gy9?g_st=iw"
+    mapUrl: "https://maps.app.goo.gl/Q9rWEneuXHkg47gy9?g_st=iw",
+    navigationUrl: "https://maps.google.com/maps?q=ByIITians+MEHRAULI&nav=1"
   },
   "vasant-kunj": {
     name: "ByIITians VASANT KUNJ", 
     address: "Vasant Kunj, New Delhi",
-    mapUrl: "https://maps.app.goo.gl/6UV3E17ruEEFsg1q8?g_st=iw"
+    mapUrl: "https://maps.app.goo.gl/6UV3E17ruEEFsg1q8?g_st=iw",
+    navigationUrl: "https://maps.google.com/maps?q=ByIITians+VASANT+KUNJ&nav=1"
   },
   okhala: {
     name: "ByIITians OKHLA",
     address: "Okhla, New Delhi", 
-    mapUrl: "https://maps.app.goo.gl/7H3kDanHGtpiCTjL9?g_st=iw"
+    mapUrl: "https://maps.app.goo.gl/7H3kDanHGtpiCTjL9?g_st=iw",
+    navigationUrl: "https://maps.google.com/maps?q=ByIITians+OKHLA&nav=1"
   }
 };
 
