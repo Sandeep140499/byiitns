@@ -14,6 +14,7 @@ import SubjectDetail from "./pages/SubjectDetail";
 import OlympiadRegistration from "./pages/OlympiadRegistration";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Payment from "./pages/Payment";
+import ToppersTalk from "./pages/ToppersTalk";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/toppers-talk" element={<ToppersTalk />} />
           <Route path="/olympiad-registration" element={<OlympiadRegistration />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />

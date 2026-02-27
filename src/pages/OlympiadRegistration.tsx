@@ -9,7 +9,7 @@ import paymentQR from "@/assets/paymentQR.jpeg";
 import firstPrize from "@/assets/prizes/1st.png";
 import secondPrize from "@/assets/prizes/2nd.png";
 import thirdPrize from "@/assets/prizes/3rd.png";
-import { ArrowLeft, AlertCircle, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, AlertCircle, CheckCircle2, Download, FileText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { InvoiceDownloadButton } from "@/components/InvoiceComponent";
 
@@ -397,19 +397,19 @@ export default function OlympiadRegistration() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/10">
       {/* Full-Width Header */}
-      <div className="w-full bg-gradient-to-b from-primary/10 to-transparent py-12 sm:py-16 md:py-20">
-        <div className="text-center space-y-4">
-          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight px-4">
+      <div className="w-full bg-gradient-to-b from-primary/10 to-transparent py-6 sm:py-12 md:py-16 lg:py-20">
+        <div className="text-center space-y-3 sm:space-y-4 px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight">
             <span className="text-primary">By</span>
             <span className="text-red">IITians</span>
           </h2>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary px-4">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary">
             Olympiad Aptitude Test
           </h1>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 w-full max-w-full sm:max-w-3xl lg:max-w-4xl">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-8">
         <Button
           variant="ghost"
           onClick={() => navigate("/")}
@@ -419,9 +419,9 @@ export default function OlympiadRegistration() {
           Back to Home
         </Button>
 
-        <Card className="border-4 border-primary/20 rounded-3xl overflow-hidden bg-gradient-to-br from-card to-primary/5 shadow-lg">
-          <CardHeader className="text-center pb-6">
-            <CardDescription className="text-base">
+        <Card className="border-2 sm:border-4 border-primary/20 rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-card to-primary/5 shadow-lg">
+          <CardHeader className="text-center pb-4 sm:pb-6">
+            <CardDescription className="text-sm sm:text-base px-2">
               Register for the Olympiad Aptitude Test - Fee ₹300
             </CardDescription>
           </CardHeader>
@@ -622,6 +622,39 @@ export default function OlympiadRegistration() {
                     />
                   </div>
                 </div>
+              </div>
+
+              {/* Information Brochure Section */}
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-4 sm:p-6 space-y-4">
+                <h3 className="font-bold text-lg sm:text-xl text-blue-900 dark:text-blue-300 flex items-center">
+                  <FileText className="h-5 w-5 sm:h-6 sm:w-6 mr-2" />
+                  Information Brochure
+                </h3>
+                <p className="text-blue-900 dark:text-blue-200 font-medium text-sm sm:text-base">
+                  Download our comprehensive Olympiad Information Brochure for complete details about the test, syllabus, prizes, and guidelines.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href="/assets/testSeries/OLYMPIAD INFORMATION BROUCHER.pdf"
+                    download="OLYMPIAD_INFORMATION_BROUCHER.pdf"
+                    className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium text-sm sm:text-base"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download Brochure
+                  </a>
+                  <a
+                    href="/assets/testSeries/OLYMPIAD INFORMATION BROUCHER.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-xl hover:bg-blue-50 transition-colors font-medium text-sm sm:text-base"
+                  >
+                    <FileText className="h-4 w-4 mr-2" />
+                    View Online
+                  </a>
+                </div>
+                <p className="text-xs sm:text-sm text-blue-700 dark:text-blue-400">
+                  📄 The brochure will also be sent to your email after successful registration
+                </p>
               </div>
 
               {/* Fee Information */}

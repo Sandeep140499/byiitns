@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
 import { generateInvoicePDF } from "./pdfGenerator.js";
+import fs from "fs";
+import path from "path";
 
 // Email transporter setup with Gmail
 const transporter = nodemailer.createTransport({
@@ -15,6 +17,28 @@ function generateSerialNumber() {
   const randomId = Math.random().toString(36).substring(2, 8).toUpperCase();
   return `BYIIT-${randomId}`;
 }
+
+// Center locations with map URLs
+const centerLocations = {
+  mehrauli: {
+    name: "ByIITians MEHRAULI",
+    address: "Mehrauli, New Delhi",
+    mapUrl: "https://maps.app.goo.gl/Q9rWEneuXHkg47gy9?g_st=iw",
+    navigationUrl: "https://maps.google.com/maps?q=ByIITians+MEHRAULI&nav=1"
+  },
+  "vasant-kunj": {
+    name: "ByIITians VASANT KUNJ", 
+    address: "Vasant Kunj, New Delhi",
+    mapUrl: "https://maps.app.goo.gl/6UV3E17ruEEFsg1q8?g_st=iw",
+    navigationUrl: "https://maps.google.com/maps?q=ByIITians+VASANT+KUNJ&nav=1"
+  },
+  okhala: {
+    name: "ByIITians OKHLA",
+    address: "Okhla, New Delhi", 
+    mapUrl: "https://maps.app.goo.gl/7H3kDanHGtpiCTjL9?g_st=iw",
+    navigationUrl: "https://maps.google.com/maps?q=ByIITians+OKHLA&nav=1"
+  }
+};
 
 // Send payment link email
 export async function sendPaymentLinkEmail(formData) {
@@ -259,6 +283,9 @@ export async function sendRegistrationEmails(formData) {
   const ownerEmail = "sumanme10@gmail.com";
   const studentEmail = formData.email;
 
+  // Get selected center information
+  const selectedCenter = centerLocations[formData.center] || null;
+
   // Generate PDF invoice
   let pdfBuffer;
   try {
@@ -266,6 +293,16 @@ export async function sendRegistrationEmails(formData) {
   } catch (error) {
     console.error("Error generating PDF:", error);
     throw new Error("Failed to generate invoice PDF");
+  }
+
+  // Get brochure path
+  const brochurePath = path.join(process.cwd(), 'public', 'assets', 'testSeries', 'OLYMPIAD INFORMATION BROUCHER.pdf');
+  let brochureBuffer;
+  try {
+    brochureBuffer = fs.readFileSync(brochurePath);
+  } catch (error) {
+    console.error("Error reading brochure:", error);
+    // Continue without brochure if file not found
   }
 
   const registrationDetails = `
@@ -292,6 +329,26 @@ export async function sendRegistrationEmails(formData) {
   `;
 
   // Email to student
+  const studentAttachments = [
+    {
+      filename: `ByIITians_Invoice_${serialNumber}.pdf`,
+      content: pdfBuffer,
+      contentType: "application/pdf",
+    }
+  ];
+
+  // Add brochure if available
+  if (brochureBuffer) {
+    studentAttachments.push({
+      filename: "OLYMPIAD_INFORMATION_BROUCHER.pdf",
+      content: brochureBuffer,
+      contentType: "application/pdf",
+      headers: {
+        'Content-ID': '<brochure>',
+      }
+    });
+  }
+
   const studentMailOptions = {
     from: "sumanme10@gmail.com",
     to: studentEmail,
@@ -315,8 +372,35 @@ export async function sendRegistrationEmails(formData) {
             <p style="margin: 5px 0; color: #333;"><strong>Name:</strong> ${formData.name}</p>
             <p style="margin: 5px 0; color: #333;"><strong>Class:</strong> ${formData.class}</p>
             <p style="margin: 5px 0; color: #333;"><strong>School:</strong> ${formData.schoolName}</p>
-            <p style="margin: 5px 0; color: #333;"><strong>Center:</strong> ${formData.center ? formData.center.charAt(0).toUpperCase() + formData.center.slice(1) : 'Not specified'}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>Center:</strong> ${selectedCenter ? selectedCenter.name : 'Not specified'}</p>
             <p style="margin: 5px 0; color: #333;"><strong>Registration Fee:</strong> <span style="color: #d32f2f; font-weight: bold; font-size: 18px;">₹300</span></p>
+          </div>
+
+          ${selectedCenter ? `
+          <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+            <h3 style="margin: 0 0 15px; font-size: 18px;">📍 Your Center Location</h3>
+            <p style="margin: 5px 0; font-weight: bold;">${selectedCenter.name}</p>
+            <p style="margin: 5px 0;">${selectedCenter.address}</p>
+            <div style="margin: 15px 0;">
+              <a href="${selectedCenter.mapUrl}" target="_blank" style="display: inline-block; background: white; color: #4CAF50; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-right: 10px;">
+                🗺️ View Map
+              </a>
+              <a href="${selectedCenter.navigationUrl}" target="_blank" style="display: inline-block; background: #2196F3; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                🧭 Navigate Now
+              </a>
+            </div>
+          </div>
+          ` : ''}
+
+          <div style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+            <h3 style="margin: 0 0 15px; font-size: 18px;">📄 Information Brochure</h3>
+            <p style="margin: 10px 0;">Download your comprehensive Olympiad Information Brochure for complete details:</p>
+            <div style="margin: 15px 0;">
+              <a href="cid:brochure" style="display: inline-block; background: white; color: #FF9800; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-right: 10px;">
+                📥 Download Brochure
+              </a>
+            </div>
+            <p style="margin: 10px 0; font-size: 14px;">The brochure is also attached to this email for your convenience.</p>
           </div>
           
           <div style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
@@ -366,6 +450,7 @@ export async function sendRegistrationEmails(formData) {
         </div>
       </div>
     `,
+    attachments: studentAttachments,
   };
 
   // Email to owner
@@ -387,10 +472,13 @@ export async function sendRegistrationEmails(formData) {
             <p style="margin: 5px 0; color: #333;"><strong>Name:</strong> ${formData.name}</p>
             <p style="margin: 5px 0; color: #333;"><strong>Class:</strong> ${formData.class}</p>
             <p style="margin: 5px 0; color: #333;"><strong>School:</strong> ${formData.schoolName}</p>
-            <p style="margin: 5px 0; color: #333;"><strong>Center:</strong> ${formData.center ? formData.center.charAt(0).toUpperCase() + formData.center.slice(1) : 'Not specified'}</p>
+            <p style="margin: 5px 0; color: #333;"><strong>Center:</strong> ${selectedCenter ? selectedCenter.name : 'Not specified'}</p>
             <p style="margin: 5px 0; color: #333;"><strong>Registration Fee:</strong> <span style="color: #d32f2f; font-weight: bold; font-size: 18px;">₹300</span></p>
             <p style="margin: 5px 0; color: #333;"><strong>Status:</strong> Pending Payment Verification</p>
             <p style="margin: 5px 0; color: #333;"><strong>Registration Date:</strong> ${new Date().toLocaleDateString()}</p>
+            ${selectedCenter ? `
+            <p style="margin: 5px 0; color: #333;"><strong>Center Map:</strong> <a href="${selectedCenter.mapUrl}" target="_blank" style="color: #2196F3; text-decoration: underline;">View Location</a></p>
+            ` : ''}
             <p style="margin: 5px 0; color: #333;">Please verify the payment screenshot sent by the student at +91 8447412646</p>
           </div>
           
