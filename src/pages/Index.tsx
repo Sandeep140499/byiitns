@@ -353,9 +353,9 @@ const Index = () => {
           </div>
           
           <div className="flex justify-center">
-            <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-6xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-6xl w-full">
               {centerLocations.map((center, index) => (
-                <Card key={index} className="group hover:shadow-2xl transition-all duration-300 border-2 border-primary/20 hover:border-primary/40 rounded-2xl overflow-hidden bg-gradient-to-br from-card to-primary/5 h-full min-h-[280px] sm:min-h-[320px]">
+                <Card key={index} className="group hover:shadow-2xl transition-all duration-300 border-2 border-primary/20 hover:border-primary/40 rounded-2xl overflow-hidden bg-gradient-to-br from-card to-primary/5 h-full min-h-[250px] sm:min-h-[280px] md:min-h-[320px]">
                   <CardHeader className="text-center pb-3 sm:pb-4 flex flex-col justify-between h-full">
                     <div>
                       <div className="mx-auto mb-3 sm:mb-4 flex h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary to-red group-hover:scale-110 transition-transform duration-300 shadow-lg">
