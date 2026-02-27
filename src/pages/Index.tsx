@@ -417,8 +417,16 @@ const Index = () => {
               />
             );
           })}
-          
-          {/* New Information Brochure Card */}
+
+          {/* Always-visible Test Series Card (opens PDF directly) */}
+          <SectionCard
+            id="test-series"
+            title="Test Series"
+            description="Practice tests and mock examinations"
+            icon="FileText"
+          />
+
+          {/* Always-visible Information Brochure Card */}
           <SectionCard
             id="information-brochure"
             title="Information Brochure"
